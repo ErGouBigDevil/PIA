@@ -1,80 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="author" content="Kodinger">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="css/my-login.css">
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PIA | register</title>
+    <link rel="stylesheet" href="../vendor/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../vendor/css/my-login.css">
 </head>
 <body class="my-login-page">
-	<section class="h-100">
-		<div class="container h-100">
-			<div class="row justify-content-md-center h-100">
-				<div class="card-wrapper">
-					<div class="brand">
-						<img src="img/logo.jpg" alt="bootstrap 4 login page">
-					</div>
-					<div class="card fat">
-						<div class="card-body">
-							<h4 class="card-title">Register</h4>
-							<form method="POST" class="my-login-validation" novalidate="">
-								<div class="form-group">
-									<label for="name">Name</label>
-									<input id="name" type="text" class="form-control" name="name" required autofocus>
-									<div class="invalid-feedback">
-										What's your name?
-									</div>
-								</div>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="../vendor/img/logo.jpg" alt="bootstrap 4 login page">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">用户注册</h4>
+                        <form method="POST" class="my-login-validation" onsubmit="return false;" novalidate="" id="registerForm">
+                            <div class="form-group">
+                                <label for="username">用户名</label>
+                                <input id="username" type="text" class="form-control" name="username" required
+                                       autofocus>
+                                <div class="invalid-feedback" id="un-feedback">
+                                    该用户名已经被注册!
+                                </div>
+                            </div>
 
-								<div class="form-group">
-									<label for="email">E-Mail Address</label>
-									<input id="email" type="email" class="form-control" name="email" required>
-									<div class="invalid-feedback">
-										Your email is invalid
-									</div>
-								</div>
+                            <div class="form-group">
+                                <label for="email">电子邮件地址</label>
+                                <input id="email" type="email" class="form-control" name="email" required>
+                                <div class="invalid-feedback">
+                                    您输入的电子邮件无效!
+                                </div>
+                            </div>
 
-								<div class="form-group">
-									<label for="password">Password</label>
-									<input id="password" type="password" class="form-control" name="password" required data-eye>
-									<div class="invalid-feedback">
-										Password is required
-									</div>
-								</div>
+                            <div class="form-group">
+                                <label for="password">密码</label>
+                                <input id="password" type="password" class="form-control" name="password" required
+                                       data-eye>
+                                <div class="invalid-feedback">
+                                    您必须填写密码!
+                                </div>
+                            </div>
 
-								<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
-										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and Conditions</a></label>
-										<div class="invalid-feedback">
-											You must agree with our Terms and Conditions
-										</div>
-									</div>
-								</div>
+                            <div class="form-group">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" id="agree" class="custom-control-input"
+                                           required="">
+                                    <label for="agree" class="custom-control-label">我已经阅读并且同意 <a
+                                            href="#">服务条款</a></label>
+                                    <div class="invalid-feedback">
+                                        您必须同意我们的条款
+                                    </div>
+                                </div>
+                            </div>
 
-								<div class="form-group m-0">
-									<button type="submit" class="btn btn-primary btn-block">
-										Register
-									</button>
-								</div>
-								<div class="mt-4 text-center">
-									Already have an account? <a href="../index.html">Login</a>
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="footer">
-						Copyright &copy; 2017 &mdash; Your Company 
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                            <div class="form-group m-0">
+                                <button type="submit" class="btn btn-primary btn-block" id="registerBtn">
+                                    注册
+                                </button>
+                            </div>
+                            <div class="mt-4 text-center">
+                                已经拥有一个账户? <a href="../index.html">登录</a>
+                            </div>
+                            <div class="alert" role="alert" id="registerResult" style="margin: 5px 20% 5px 20%">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    Copyright &copy; 2019 &mdash; ErGouBigDevil
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="js/my-login.js"></script>
+<script src="../vendor/js/jquery-3.4.0.min.js"></script>
+<script src="../vendor/js/bootstrap.bundle.js"></script>
+<script src="../vendor/js/show_password.js"></script>
+<script>
+    $(function () {
+        function getPath() {
+            var curPath = window.document.location.href;
+            var pathName = window.document.location.pathname;
+            var pos = curPath.indexOf(pathName);
+            var localhostPath = curPath.substring(0, pos);
+            var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+            return localhostPath + projectName;
+        };
+
+        $('#username').focus(function () {
+            $('#username').removeClass('is-invalid');
+            $('#registerBtn').removeClass('disabled');
+        });
+
+        $('#username').blur(function () {
+            var username = $('#username').val();
+            if (username != '') {
+                $.ajax({
+                    type: "post",
+                    url: getPath() + "/user/isRegistered",
+                    async: false,
+                    dataType: 'json',
+                    data: {"username": username},
+                    success: function (data) {
+                        if (data.result) {
+                            $('#username').addClass('is-valid');
+                        } else {
+                            $('#username').addClass('is-invalid');
+                            $('#un-feedback').html('抱歉，该用户名已被注册！');
+                        }
+                    },
+                    error: function () {
+                        $('#registerBtn').addClass('disabled');
+                        $('#registerResult').addClass('alert-danger');
+                        $('#registerResult').html('与服务器连接失败!');
+                    }
+
+
+                })
+            }
+        });
+
+        $(".my-login-validation").submit(function () {
+            var form = $(this);
+            console.log(form);
+            if (form[0].checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                $('#registerBtn').addClass('disabled');
+                form.addClass('was-validated');
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: getPath() + "/user/register",
+                    async: false,
+                    dataType: 'json',
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        if (data.result) {
+                            $('#registerResult').addClass('alert-success');
+                            $('#registerResult').html('注册成功!跳转至<a href="../index.html">登录</a>界面');
+                            setTimeout(window.location.href = '../index.html', 5000);
+
+                        } else {
+                            $('#registerResult').addClass('alert-danger');
+                            $('#registerResult').html('注册失败!');
+                        }
+                    },
+                    error: function () {
+                        $('#registerResult').addClass('alert-danger');
+                        $('#registerResult').html('网络错误!')
+                    }
+                })
+            }
+
+
+        });
+        // $("#registerBtn").click(function () {
+        //     var form = $('#registerForm');
+        //     console.log(form);
+        //     if (form[0].checkValidity() === false) {
+        //         console.log('aaaaaaa');
+        //         event.preventDefault();
+        //         event.stopPropagation();
+        //         console.log('bbbbbb');
+        //     }else{
+        //         // $("#registerForm").attr("action", getPath()+"/user/register");
+        //         form.addClass('was-validated');
+        //         $.ajax({
+        //             type: "post",
+        //             url: getPath() + "/user/register",
+        //             async: false,
+        //             dataType:'json',
+        //             data:$('form').serialize(),
+        //             success: function (data) {
+        //                 if (data.result) {
+        //                     $('#registerResult').addClass('alert-success');
+        //                     $('#registerResult').html('注册成功!跳转至<a href="../index.html">登录</a>界面');
+        //                     setTimeout(window.location.href = '../index.html', 5000);
+        //
+        //                 } else {
+        //                     $('#registerResult').addClass('alert-danger');
+        //                     $('#registerResult').html('注册失败!');
+        //                 }
+        //             },
+        //             error: function () {
+        //                 $('#registerResult').addClass('alert-danger');
+        //                 $('#registerResult').html('网络错误!')
+        //             }
+        //         })
+        //     }
+        //
+        //
+        //
+        // });
+    });
+
+
+</script>
 </body>
 </html>

@@ -1,74 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>PIA | My Login Page</title>
-	<link rel="stylesheet" href="vendor/css/bootstrap.css">
-	<link rel="stylesheet" href="vendor/css/my-login.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PIA | My Login Page</title>
+    <link rel="stylesheet" href="vendor/css/bootstrap.css">
+    <link rel="stylesheet" href="vendor/css/my-login.css">
 </head>
 
 <body class="my-login-page">
-	<section class="h-100">
-		<div class="container h-100">
-			<div class="row justify-content-md-center h-100">
-				<div class="card-wrapper">
-					<div class="brand">
-						<img src="vendor/img/logo.jpg" alt="logo">
-					</div>
-					<div class="card fat">
-						<div class="card-body">
-							<h4 class="card-title">用户登录</h4>
-							<form class="my-login-validation form-group" novalidate="true">
-								<div class="form-group">
-									<label for="username">用户名</label>
-									<input id="username" class="form-control" name="username" value="">
-									<div class="invalid-feedback">
-										用户名无效!
-									</div>
-								</div>
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="vendor/img/logo.jpg" alt="logo">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">用户登录</h4>
+                        <form class="my-login-validation form-group" novalidate="true">
+                            <div class="form-group">
+                                <label for="username">用户名</label>
+                                <input id="username" class="form-control" name="username" value="">
+                                <div class="invalid-feedback">
+                                    用户名无效!
+                                </div>
+                            </div>
 
-								<div class="form-group">
-									<label for="password">密码
-										<a href="html/forgot.html" class="float-right">
-											忘记密码?
-										</a>
-									</label>
-									<input id="password" type="password" class="form-control" name="password" data-eye>
-								    <div class="invalid-feedback">
-								    	必须填写密码!
-							    	</div>
-								</div>
+                            <div class="form-group">
+                                <input id="password" type="password" class="form-control" name="password" data-eye>
+                                <div class="invalid-feedback" id="pw-feedback">
+                                    必须填写密码!
+                                </div>
+                            </div>
 
-								<div class="form-group">
-									<div class="custom-checkbox custom-control">
-										<input type="checkbox" id="remember" class="custom-control-input">
-										<label for="remember" class="custom-control-label">记住我</label>
-									</div>
-								</div>
+                            <div class="form-group">
+                                <div class="custom-checkbox custom-control">
+                                    <input type="checkbox" id="remember" class="custom-control-input">
+                                    <label for="remember" class="custom-control-label">记住我</label>
+                                </div>
+                            </div>
 
-								<div class="form-group m-0">
-									<input id="loginBtn" class="btn btn-primary btn-block" value="登录" type="button"/>
-								</div>
-								<div class="mt-4 text-center">
-									还没有账户? 注册一个吧!&nbsp;&nbsp;<a href="html/register.html">注册</a>
-								</div>
-								<div class="alert" role="alert" id="loginResult" style="margin: 5px 20% 5px 20%">
-								</div>
-							</form>
-						</div>
-					</div>
-					<div class="footer">
-						Copyright &copy; 2019 &mdash; ErGouBigDevil
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                            <div class="form-group m-0">
+                                <input id="loginBtn" class="btn btn-primary btn-block" value="登录" type="button"/>
+                            </div>
+                            <div class="mt-4 text-center">
+                                还没有账户? 注册一个吧!&nbsp;&nbsp;<a href="html/register.html">注册</a>
+                            </div>
+                            <div class="alert" role="alert" id="loginResult" style="margin: 5px 20% 5px 20%">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer">
+                    Copyright &copy; 2019 &mdash; ErGouBigDevil
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-	<script src="vendor/js/jquery-3.4.0.min.js" ></script>
-	<script src="vendor/js/bootstrap.bundle.js" ></script>
-	<script src="vendor/js/my-login.js"></script>
-	<script src="vendor/js/jquery.cookie.js"></script>
+<script src="vendor/js/jquery-3.4.0.min.js"></script>
+<script src="vendor/js/bootstrap.bundle.js"></script>
+<script src="vendor/js/show_password.js"></script>
+<script src="vendor/js/jquery.cookie.js"></script>
+<script>
+    function getPath() {
+        var curPath = window.document.location.href;
+        var pathName = window.document.location.pathname;
+        var pos = curPath.indexOf(pathName);
+        var localhostPath = curPath.substring(0, pos);
+        var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+        return localhostPath + projectName;
+    };
+
+    var username = $.cookie('username');
+    var password = $.cookie('password');
+
+    $('#username').val(username);
+    $('#password').val(password);
+    if (username != null && password != null) {//选中保存秘密的复选框
+        $("#remember").attr('checked', true);
+    }
+
+
+    $('#username').focus(function () {
+        $('#username').removeClass('is-invalid');
+    })
+
+    $('#password').focus(function () {
+        $('#password').removeClass('is-invalid');
+    });
+
+
+    $('#loginBtn').click(function () {
+            var flag = true;
+            var username = $('#username').val();
+            var password = $('#password').val();
+            if (username == '') {
+                $('#username').addClass('is-invalid');
+                flag = false;
+            }
+            if (password == '') {
+                $('#password').addClass('is-invalid');
+                flag = false;
+            }
+
+            if (flag) {
+                $.ajax({
+                    type: "post",
+                    url: getPath() + "/user/login",
+                    async: false,
+                    dataType: "json",
+                    data: $('form').serialize(),
+                    success: function (data) {
+                        if (data.result) {
+                            if ($("#remember").is(":checked")) {
+                                $.cookie("username", username, {expires: 7});
+                                $.cookie("password", password, {expires: 7});
+                            } else {
+                                $.cookie("username", "", {expires: -1});
+                                $.cookie("password", "", {expires: -1});
+                            }
+                            $('#loginResult').addClass('alert-success');
+                            $('#loginResult').html('登录成功!');
+                        } else {
+                            $('#password').addClass('is-invalid');
+                            $('#pw-feedback').html('密码错误!');
+                        }
+                    },
+                    error: function () {
+                        $('#loginResult').addClass('alert-danger');
+                        $('#loginResult').html('与服务器连接失败');
+                    }
+                })
+            }
+
+        }
+    );
+
+
+</script>
 </body>
 </html>

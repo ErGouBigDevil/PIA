@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,12 +22,12 @@ import java.io.IOException;
  * @Datetime 2019/7/4 15:54
  */
 @Controller
-@RequestMapping ( "/user" )
+@RequestMapping("/user")
 public class UserController {
     @Resource(name = "userService")
     IUserService userService;
 
-    Logger log = LoggerFactory.getLogger(this.getClass());
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
 
     /**
@@ -84,17 +85,21 @@ public class UserController {
      */
     @PostMapping(value = "/register")
     @ResponseBody
-    public void userRegister(@RequestBody User user, HttpServletResponse response) {
-        System.out.println(user.toString());
-        JSONObject resultJson = new JSONObject();
+    public void userRegister(@RequestParam(value = "username") String username,
+                             @RequestParam(value = "password") String password,
+                             @RequestParam(value = "email") String email,
+                             HttpServletRequest request,
+                             HttpServletResponse response){
+        User user = new User(0,username,password,email);
+        log.debug(user.toString());
         log.debug("SAVE TO DB: " + user);
+        JSONObject resultJson = new JSONObject();
         if (userService.insertUser(user) > 0)
             resultJson.put("result", true);
         else
             resultJson.put("result", false);
         writeJSON2Response(resultJson, response);
     }
-
 
 
     /**
@@ -107,7 +112,8 @@ public class UserController {
      */
     @PostMapping(value = "/isRegistered")
     @ResponseBody
-    public void isRegistered(String username, HttpServletResponse response) {
+    public void isRegistered(@RequestParam(value = "username") String username, HttpServletResponse response) {
+        log.debug("FRONT END TO SERVER: " + username);
         JSONObject resultJson = new JSONObject();
         if (userService.findUserByName(username) == null)
             resultJson.put("result", true);
@@ -123,7 +129,7 @@ public class UserController {
      * @Param request
      * @Return java.lang.String
      */
-    @PostMapping(value="/logout")
+    @PostMapping(value = "/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return "redirect:login";
