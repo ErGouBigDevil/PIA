@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.pia.dao.IUserDao">
+    <!--1.根据用户用户名及密码获得信息 -->
+    <select id="findByNameAndPassword" resultType="com.sust.pia.model.User">
+		select * from user where username=#{username} and password=#{password}
+	</select>
+
+    <!--2.插入用户信息 -->
+    <insert id="insertUser" parameterType="com.sust.pia.model.User" useGeneratedKeys="true" keyProperty="id">
+		insert into user(username,password,email_address) values(#{username},#{password},#{emailAddress})
+	</insert>
+
+
+    <!--3.根据用户用户名查找用户 -->
+    <select id="findUserByName" parameterType="String"
+            resultType="com.sust.pia.model.User">
+		select * from user where username=#{username}
+	</select>
+</mapper>

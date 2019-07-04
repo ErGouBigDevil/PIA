@@ -13,7 +13,7 @@ import java.util.List;
  * @Author Haodong Zhao
  * @Package com.sust.pia.model
  * @Description 用户信息持久化类
- * @Date 2019/7/3 10:51
+ * @Datetime 2019/7/3 10:51
  */
 
 
@@ -22,7 +22,7 @@ import java.util.List;
 public class User {
     @Setter
     @Getter
-    private String id;
+    private Integer id;
     @Setter
     @Getter
     private String username;
@@ -32,15 +32,15 @@ public class User {
     @Setter
     @Getter
     private String emailAddress;
-    @Setter
-    @Getter
-    private List<Contact> contacts;
-    @Setter
-    @Getter
-    private List<ToDo> toDoList;
-    @Setter
-    @Getter
-    private List<Pass> passList;
+//    @Setter
+//    @Getter
+//    private List<Contact> contacts;
+//    @Setter
+//    @Getter
+//    private List<ToDo> toDoList;
+//    @Setter
+//    @Getter
+//    private List<Pass> passList;
 
     @Override
     public String toString() {

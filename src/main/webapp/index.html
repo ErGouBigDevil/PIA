@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>PIA | My Login Page</title>
+	<link rel="stylesheet" href="vendor/css/bootstrap.css">
+	<link rel="stylesheet" href="vendor/css/my-login.css">
+</head>
+
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="brand">
+						<img src="vendor/img/logo.jpg" alt="logo">
+					</div>
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">用户登录</h4>
+							<form class="my-login-validation form-group" novalidate="true">
+								<div class="form-group">
+									<label for="username">用户名</label>
+									<input id="username" class="form-control" name="username" value="">
+									<div class="invalid-feedback">
+										用户名无效!
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="password">密码
+										<a href="html/forgot.html" class="float-right">
+											忘记密码?
+										</a>
+									</label>
+									<input id="password" type="password" class="form-control" name="password" data-eye>
+								    <div class="invalid-feedback">
+								    	必须填写密码!
+							    	</div>
+								</div>
+
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" id="remember" class="custom-control-input">
+										<label for="remember" class="custom-control-label">记住我</label>
+									</div>
+								</div>
+
+								<div class="form-group m-0">
+									<input id="loginBtn" class="btn btn-primary btn-block" value="登录" type="button"/>
+								</div>
+								<div class="mt-4 text-center">
+									还没有账户? 注册一个吧!&nbsp;&nbsp;<a href="html/register.html">注册</a>
+								</div>
+								<div class="alert" role="alert" id="loginResult" style="margin: 5px 20% 5px 20%">
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="footer">
+						Copyright &copy; 2019 &mdash; ErGouBigDevil
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="vendor/js/jquery-3.4.0.min.js" ></script>
+	<script src="vendor/js/bootstrap.bundle.js" ></script>
+	<script src="vendor/js/my-login.js"></script>
+	<script src="vendor/js/jquery.cookie.js"></script>
+</body>
+</html>
