@@ -19,13 +19,13 @@ import lombok.Setter;
 public class Contact {
     @Setter
     @Getter
-    private int userId;
+    private String userId;
     @Setter
     @Getter
     private String name;
     @Setter
     @Getter
-    private Long phone;
+    private String phone;
     @Setter
     @Getter
     private String email;

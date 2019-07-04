@@ -22,7 +22,7 @@ import java.util.List;
 public class User {
     @Setter
     @Getter
-    private Integer id;
+    private String id;
     @Setter
     @Getter
     private String username;

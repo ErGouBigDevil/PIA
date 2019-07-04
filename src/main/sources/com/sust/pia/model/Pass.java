@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Pass {
     @Setter
     @Getter
-    private Integer userId;
+    private String userId;
     @Setter
     @Getter
     private String website;   // 网站名称
