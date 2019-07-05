@@ -21,7 +21,10 @@ import java.util.Date;
 public class ToDo {
     @Setter
     @Getter
-    private String userId;
+    private Integer toDoId;
+    @Setter
+    @Getter
+    private Integer userId;
     @Setter
     @Getter
     private String title;   // 事务标题

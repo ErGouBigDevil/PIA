@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.pia.dao.IToDoDao">
+
+    <resultMap type="com.sust.pia.model.ToDo" id="ToDoResult">
+        <id column="todo_id" jdbcType="INTEGER" property="toDoId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="deadline" jdbcType="TIMESTAMP" property="deadline"/>
+        <result column="book_price" jdbcType="FLOAT" property="price"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.sust.pia.model.ToDo">
+        insert into todo(user_id, title, deadline, site, note)
+        values(#{userId},#{title},#{deadline},#{site},#{note})
+    </insert>
+
+
+    <delete id="delete" parameterType="Integer">
+        delete from todo where todo_id=#{id}
+    </delete>
+
+
+    <update id="update" parameterType="com.sust.pia.model.ToDo">
+        update todo
+        set user_id=#{userId},title=#{title},deadline=#{deadline},site=#{site},note=#{note}
+	    where todo_id=#{toDoId}
+    </update>
+
+
+    <select id="findById" resultMap="ToDoResult"
+            parameterType="Integer">
+        select * from todo where todo_id=#{id}
+    </select>
+
+
+    <select id="findAllData" resultMap="ToDoResult"
+            parameterType="Integer">
+        select * from todo
+        where user_id=#{userId}
+        order by ${sort} ${order}
+        limit #{offset},#{rows}
+
+    </select>
+
+    <select id="findAll" resultMap="ToDoResult"
+            parameterType="Integer">
+        select * from todo where user_id=#{userId}
+    </select>
+
+
+    <select id="count" resultType="Integer">
+        select COUNT(*) from todo where user_id=#{userId}
+    </select>
+
+    <select id="findByKeyword" resultMap="ToDoResult">
+        select * from todo
+        where (title like concat('%',#{keyWord},'%')
+        or site like concat('%',#{keyWord},'%')
+        or note like concat('%',#{keyWord},'%'))
+        and user_id=#{userId}
+    </select>
+
+    <select id="findByTime" resultMap="ToDoResult">
+        select * from todo
+        where (deadline between #{startTime} and #{endTime}) and user_id=#{userId}
+    </select>
+
+
+</mapper>

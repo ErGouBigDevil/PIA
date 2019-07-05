@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>PIA | ToDoList</title>
+
+    <link rel="stylesheet" href="../vendor/css/bootstrap.css">
+    <link rel="stylesheet" href="../vendor/css/admin_page.css">
+    <script src="../vendor/js/solid.js"></script>
+    <script src="../vendor/js/fontawesome.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Personal Information Assistant</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#">Portfolio</a>
+            </li>
+            <li>
+                <a href="#">Contacts</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Sidebar</span>
+                </button>
+            </div>
+        </nav>
+
+
+
+    </div>
+</div>
+
+<script src="../vendor/js/jquery-3.4.0.min.js"></script>
+<script src="../vendor/js/bootstrap.bundle.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+
+</script>
+</body>
+
+</html>

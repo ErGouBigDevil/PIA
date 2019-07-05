@@ -5,8 +5,8 @@
     <meta name="author" content="Kodinger">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>PIA | register</title>
-    <link rel="stylesheet" href="../vendor/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../vendor/css/my-login.css">
+    <link rel="stylesheet" href="vendor/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css/my-login.css">
 </head>
 <body class="my-login-page">
 <section class="h-100">
@@ -14,7 +14,7 @@
         <div class="row justify-content-md-center h-100">
             <div class="card-wrapper">
                 <div class="brand">
-                    <img src="../vendor/img/logo.jpg" alt="bootstrap 4 login page">
+                    <img src="vendor/img/logo.jpg" alt="bootstrap 4 login page">
                 </div>
                 <div class="card fat">
                     <div class="card-body">
@@ -64,7 +64,7 @@
                                 </button>
                             </div>
                             <div class="mt-4 text-center">
-                                已经拥有一个账户? <a href="../index.html">登录</a>
+                                已经拥有一个账户? <a href="index.html">登录</a>
                             </div>
                             <div class="alert" role="alert" id="registerResult" style="margin: 5px 20% 5px 20%">
                             </div>
@@ -79,9 +79,9 @@
     </div>
 </section>
 
-<script src="../vendor/js/jquery-3.4.0.min.js"></script>
-<script src="../vendor/js/bootstrap.bundle.js"></script>
-<script src="../vendor/js/show_password.js"></script>
+<script src="vendor/js/jquery-3.4.0.min.js"></script>
+<script src="vendor/js/bootstrap.bundle.js"></script>
+<script src="vendor/js/show_password.js"></script>
 <script>
     $(function () {
         function getPath() {
@@ -144,8 +144,8 @@
                     success: function (data) {
                         if (data.result) {
                             $('#registerResult').addClass('alert-success');
-                            $('#registerResult').html('注册成功!跳转至<a href="../index.html">登录</a>界面');
-                            setTimeout(window.location.href = '../index.html', 5000);
+                            $('#registerResult').html('注册成功!跳转至<a href="index.html">登录</a>界面');
+                            setTimeout(window.location.href = 'index.html', 5000);
 
                         } else {
                             $('#registerResult').addClass('alert-danger');

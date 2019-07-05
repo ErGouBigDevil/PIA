@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS todo(
+    todo_id INT(32) PRIMARY KEY AUTO_INCREMENT,
     user_id INT(32) NOT NULL,
     title VARCHAR(50),
     deadline DATETIME ,

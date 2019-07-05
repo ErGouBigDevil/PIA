@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 /**
  * @Package com.sust.pia.dao
- * @Description IUserDao接口
+ * @Description DAO层 用户管理IUserDao接口
  * @Author Haodong Zhao
  * @Datetime 2019/7/4 10:31
  */
