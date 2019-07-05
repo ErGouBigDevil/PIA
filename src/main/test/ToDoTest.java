@@ -3,11 +3,8 @@ import com.sust.pia.service.IToDoService;
 import com.sust.pia.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -106,6 +103,13 @@ public class ToDoTest {
         Date date2 = format.parse(dateStr2);
 
         List<ToDo> list = toDoService.findByTime(date1, date2,16200);
+        for(ToDo ToDo:list)
+            System.out.println(ToDo);
+    }
+
+    @Test
+    public void findByKeyword(){
+        List<ToDo> list = toDoService.findByKeyword(16200, "集团");
         for(ToDo ToDo:list)
             System.out.println(ToDo);
     }

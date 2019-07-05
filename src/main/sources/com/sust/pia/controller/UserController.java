@@ -64,9 +64,10 @@ public class UserController {
                           HttpServletRequest request, HttpServletResponse response) {
         log.debug("FRONT END TO SERVER: " + username + " " + password);
         JSONObject resultJson = new JSONObject();
-        if (userService.findByNameAndPassword(username, password) != null) {
+        User user = userService.findByNameAndPassword(username, password);
+        if (user != null) {
             HttpSession session = request.getSession();
-            session.setAttribute("username", username);
+            session.setAttribute("userObj", user);
             resultJson.put("result", true);
         } else {
             resultJson.put("result", false);

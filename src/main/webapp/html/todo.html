@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="../vendor/css/bootstrap.css">
     <link rel="stylesheet" href="../vendor/css/admin_page.css">
+    <link rel="stylesheet" href="../vendor/css/bootstrap-table.css">
     <script src="../vendor/js/solid.js"></script>
     <script src="../vendor/js/fontawesome.js"></script>
 </head>
@@ -22,16 +23,21 @@
             <h3>Personal Information Assistant</h3>
         </div>
 
-        <ul class="list-unstyled components">
+        <div class="brand">
+            <p>
+                <img src="../../vendor/img/logo.jpg"/>
+            </p>
+        </div>
 
+        <ul class="list-unstyled components">
             <li>
-                <a href="#">About</a>
+                <a href="#">待办事务</a>
             </li>
             <li>
-                <a href="#">Portfolio</a>
+                <a href="#">联系人</a>
             </li>
             <li>
-                <a href="#">Contacts</a>
+                <a href="#">密码管理</a>
             </li>
         </ul>
     </nav>
@@ -47,20 +53,77 @@
             </div>
         </nav>
 
-
-
+        <!--数据表-->
+        <div id="toolbar">
+            <button type="button" class="btn btn-success" id="refreshBtn">
+                <i class="fas fa-sync" aria-hidden="true"></i>
+                刷新
+            </button>
+            <button type="button" class="btn btn-info" id="insertBtn" data-toggle="modal" data-target="#insertModal">
+                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                添加
+            </button>
+            <button type="button" class="btn btn-danger" id="removeBtn">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+                删除
+            </button>
+            <button type="button" class="btn btn-primary" id="updateBtn">
+                <i class="fas fa-edit"></i>
+                修改
+            </button>
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="searchButtons" data-toggle="dropdown">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                搜索
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button type="button" class="dropdown-item" id="accurateSearchBtn" data-toggle="modal"
+                        data-target="#accurateSearchModal">
+                    <i class="fa fa-search-plus" aria-hidden="true"></i>
+                    精确搜索
+                </button>
+                <button type="button" class="dropdown-item" id="fuzzSearchBtn" data-toggle="modal"
+                        data-target="#fuzzSearchModal">
+                    <i class="fa fa-search-minus" aria-hidden="true"></i>
+                    模糊搜索
+                </button>
+            </div>
+        </div>
+        <table id="table"
+               data-toggle="true"
+               data-pagination="true"
+               data-locale="zh_CN"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-sort-name="deadline"
+               data-sort-order="asc"
+               data-toolbar="#toolbar"
+               data-id-field="id"
+               data-click-to-select="true">
+            <thead>
+            <tr>
+                <th data-field="state" data-checkbox="true"></th>
+                <th data-field="title" data-sortable="true">标题</th>
+                <th data-field="deadline" data-sortable="true">截止时间</th>
+                <th data-field="site" data-sortable="true">地点</th>
+                <th data-field="note" data-sortable="true">备注</th>
+            </tr>
+            </thead>
+        </table>
+        <div class="alert  fade show" role="alert" id="mResult"></div>
     </div>
 </div>
 
 <script src="../vendor/js/jquery-3.4.0.min.js"></script>
 <script src="../vendor/js/bootstrap.bundle.js"></script>
+<script src="../vendor/js/todo.js"></script>
+<script src="../vendor/js/bootstrap-table.js"></script>
+<script src="../vendor/js/bootstrap-table-locale-all.js"></script>
 <script>
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
     });
-
 </script>
 </body>
 

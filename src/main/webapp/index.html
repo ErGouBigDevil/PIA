@@ -125,6 +125,7 @@
                             }
                             $('#loginResult').addClass('alert-success');
                             $('#loginResult').html('登录成功!');
+                            setTimeout(window.location.href = './html/todo.html', 5000);
                         } else {
                             $('#password').addClass('is-invalid');
                             $('#pw-feedback').html('密码错误!');

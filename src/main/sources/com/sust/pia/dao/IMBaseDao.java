@@ -21,10 +21,11 @@ public interface IMBaseDao<T> {
 
     ToDo findById(Integer id);
 
-    List<T> findAllData(@Param(value = "userId") Integer userId, @Param(value = "offset") Integer offset,
-                    @Param(value = "rows") Integer rows,
-                    @Param(value = "sort") String sort,
-                    @Param(value = "order") String order);
+    List<T> findAllData(@Param(value = "userId") Integer userId,
+                        @Param(value = "offset") Integer offset,
+                        @Param(value = "rows") Integer rows,
+                        @Param(value = "sort") String sort,
+                        @Param(value = "order") String order);
 
     List<T> findAll(Integer userId);
 

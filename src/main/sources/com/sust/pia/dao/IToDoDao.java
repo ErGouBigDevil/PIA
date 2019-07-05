@@ -14,7 +14,8 @@ import java.util.List;
  */
 public interface IToDoDao extends IMBaseDao<ToDo> {
 
-    List<ToDo> findByKeyword(Integer userId, String keyWord);
+    List<ToDo> findByKeyword(@Param(value = "userId") Integer userId,
+                             @Param(value = "keyWord") String keyWord);
 
     List<ToDo> findByTime(@Param(value = "startTime") Date startTime,
                           @Param(value = "endTime") Date endTime,
