@@ -1,5 +1,6 @@
 package com.sust.pia.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sust.pia.model.DataList;
 import com.sust.pia.model.ToDo;
 import com.sust.pia.model.User;
@@ -41,7 +42,7 @@ public class ToDoController {
     private void writeJSON2Response(Object out, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            // System.out.println("SERVER: " + out);
+            log.debug("SERVER[ToDoController] to Front End: " + out);
             response.getWriter().print(out);
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,11 +68,11 @@ public class ToDoController {
                            @RequestParam(value = "sort") String sort,
                            @RequestParam(value = "order") String order,
                            HttpServletRequest request, HttpServletResponse response) {
-        User user =(User) request.getSession().getAttribute("userObj");
-        log.debug("SERVER: Get user ---> " + user);
+        User user = (User) request.getSession().getAttribute("userObj");
+        log.debug("SERVER[ToDoController] Get user: " + user);
         int size = toDoService.count(user.getId());
         DataList<ToDo> toDoList = new DataList<>();
-        List<ToDo> list = toDoService.findAllData(user.getId(),offset, limit, sort, order);
+        List<ToDo> list = toDoService.findAllData(user.getId(), offset, limit, sort, order);
         if (list != null) {
             toDoList.setRows(list);
             toDoList.setTotal(size);
@@ -79,7 +80,28 @@ public class ToDoController {
         writeJSON2Response(toDoList.toString(), response);
     }
 
-
+    /**
+     * @Description
+     * @Author Haodong Zhao
+     * @Date 2019/7/5 23:47
+     * @Param toDo
+     * @Param request
+     * @Param response
+     * @Return void
+     */
+    @PostMapping(value = "/insertData")
+    @ResponseBody
+    public void insertData(@RequestBody ToDo toDo, HttpServletRequest request,
+                           HttpServletResponse response) {
+        toDo.setUserId(((User) request.getSession().getAttribute("userObj")).getId());
+        log.debug("SERVER[ToDoController] Get ToDo: " + toDo.toString());
+        JSONObject result = new JSONObject();
+        if (toDoService.insert(toDo) > 0)
+            result.put("flag", true);
+        else
+            result.put("flag", false);
+        writeJSON2Response(result, response);
+    }
 
 
 

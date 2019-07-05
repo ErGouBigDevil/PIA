@@ -2,10 +2,12 @@ package com.sust.pia.model;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -28,8 +30,10 @@ public class ToDo {
     @Setter
     @Getter
     private String title;   // 事务标题
-    @Setter
     @Getter
+    @Setter
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
     private Date deadline;  // 事务截止时间
     @Setter
     @Getter

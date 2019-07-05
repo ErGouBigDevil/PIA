@@ -16,9 +16,9 @@
 
     <mvc:default-servlet-handler/>
 
-    <mvc:resources mapping="/js/**" location="/vendor/js/"/>
-    <mvc:resources mapping="/css/**" location="/vendor/css/"/>
-    <mvc:resources mapping="/img/**" location="/vendor/img/"/>
+<!--    <mvc:resources mapping="/js/**" location="/vendor/js/"/>-->
+<!--    <mvc:resources mapping="/css/**" location="/vendor/css/"/>-->
+<!--    <mvc:resources mapping="/img/**" location="/vendor/img/"/>-->
 
 
     <!-- 定义Spring MVC的拦截器 -->
@@ -26,9 +26,9 @@
         <mvc:interceptor>
             <!-- 拦截所有请求 -->
             <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/vendor/js/**"/>
-            <mvc:exclude-mapping path="/vendor/css/**"/>
-            <mvc:exclude-mapping path="/vendor/img/**"/>
+<!--            <mvc:exclude-mapping path="/vendor/js/**"/>-->
+<!--            <mvc:exclude-mapping path="/vendor/css/**"/>-->
+<!--            <mvc:exclude-mapping path="/vendor/img/**"/>-->
             <!-- 自定义判断用户权限的拦截类  -->
             <bean class="com.sust.pia.util.AuthorityInterceptor"/>
         </mvc:interceptor>

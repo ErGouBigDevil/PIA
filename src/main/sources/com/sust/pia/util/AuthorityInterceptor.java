@@ -20,7 +20,8 @@ public class AuthorityInterceptor implements HandlerInterceptor {
     private Logger log = LoggerFactory.getLogger(this.getClass());
     // 不需要拦截的请求
     private static final String[] IGNORE_URI = {"/user/login", "/user/logout",
-            "/user/isRegistered", "/user/register", "/index.html", "/vendor", "/register.html"};
+            "/user/isRegistered", "/user/register", "/index.html",
+            "/vendor/js", "/register.html", "/vendor/css", "/vendor/img"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
@@ -50,7 +51,7 @@ public class AuthorityInterceptor implements HandlerInterceptor {
             log.debug("SERVER[AuthorityInterceptor] do not find user");
             log.debug("SERVER[AuthorityInterceptor] to " + "index.html");
             //request.getRequestDispatcher("/index.html").forward(request, response);
-            response.sendRedirect(contextPath+"/index.html");
+            response.sendRedirect(contextPath + "/index.html");
         } else {
             log.debug("SERVER[AuthorityInterceptor] Get User: " + user.toString());
             flag = true;

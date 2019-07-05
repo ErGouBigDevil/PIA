@@ -57,7 +57,70 @@ function initTable() {
                 $('#mResult').html('');
             }, 2000);
         },
+    });
 
+    // 刷新表格
+    $('#refreshBtn').click(function () {
+        initTable();
+    });
+
+    // 添加信息
+    $('#insertSave').click(function () {
+        var insertTitle = $('#insertTitle').val();
+        var insertDeadline = $('#insertDeadline').val();
+        console.log(insertDeadline+":00");
+        var insertSite = $('#insertSite').val();
+        var insertNote = $('#insertNote').val();
+
+        $.ajax({
+            type: "post",
+            url: getPath() + "/todo/insertData",
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "toDoId": 0,
+                "userId": 0,
+                "title": insertTitle,
+                "deadline": insertDeadline + ":00",
+                "site": insertSite,
+                "note": insertNote
+            }),
+            success: function (data) {
+                if (data.flag) {
+                    $('#insertModal').modal("hide");
+                    $('#insertTitle').val('');
+                    $('#insertDeadline').val('');
+                    $('#insertSite').val('');
+                    $('#insertNote').val('');
+                    bootbox.alert({
+                        centerVertical: true,
+                        title: "成功",
+                        message: "添加成功!",
+                        locale: "zh_CN"
+                    })
+                    initTable();
+                } else {
+                    bootbox.alert({
+                        centerVertical: true,
+                        title: "失败",
+                        message: "添加失败!",
+                        locale: "zh_CN"
+                    })
+                    initTable();
+                }
+
+            },
+            error: function () {
+                $('#mResult').addClass('alert-danger');
+                $('#mResult').html("由于服务器原因，添加失败!");
+                setTimeout(function () {
+                    $('#mResult').removeClass('alert-danger');
+                    $('#mResult').html('');
+                }, 2000);
+            }
+        })
 
     });
+
 }
