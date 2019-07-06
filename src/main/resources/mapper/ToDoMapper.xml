@@ -8,7 +8,6 @@
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="deadline" jdbcType="TIMESTAMP" property="deadline"/>
-        <result column="book_price" jdbcType="FLOAT" property="price"/>
     </resultMap>
     <insert id="insert" parameterType="com.sust.pia.model.ToDo">
         insert into todo(user_id, title, deadline, site, note)

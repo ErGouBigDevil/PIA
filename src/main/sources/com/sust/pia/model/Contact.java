@@ -19,7 +19,10 @@ import lombok.Setter;
 public class Contact {
     @Setter
     @Getter
-    private String userId;
+    private Integer contactId;
+    @Setter
+    @Getter
+    private Integer userId;
     @Setter
     @Getter
     private String name;

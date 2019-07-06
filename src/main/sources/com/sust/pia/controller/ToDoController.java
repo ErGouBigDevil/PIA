@@ -5,7 +5,6 @@ import com.sust.pia.model.DataList;
 import com.sust.pia.model.ToDo;
 import com.sust.pia.model.User;
 import com.sust.pia.service.IToDoService;
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

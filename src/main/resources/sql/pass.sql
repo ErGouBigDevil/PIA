@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS pass(
+    pass_id INT(32) PRIMARY KEY AUTO_INCREMENT,
     user_id INT(32) NOT NULL,
     website VARCHAR(50),
     username VARCHAR(50),

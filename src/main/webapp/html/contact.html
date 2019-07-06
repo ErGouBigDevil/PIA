@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>PIA | ToDoList</title>
+    <title>PIA | Contacts</title>
 
     <link rel="stylesheet" href="../vendor/css/bootstrap.css">
     <link rel="stylesheet" href="../vendor/css/admin_page.css">
@@ -32,10 +32,10 @@
 
         <ul class="list-unstyled components">
             <li>
-                <a href="#">待办事务</a>
+                <a href="./todo.html">待办事务</a>
             </li>
             <li>
-                <a href="contact.html">联系人</a>
+                <a href="./contact.html">联系人</a>
             </li>
             <li>
                 <a href="#">密码管理</a>
@@ -88,15 +88,15 @@
                 搜索
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button type="button" class="dropdown-item" id="dateSearchBtn" data-toggle="modal"
-                        data-target="#findByDateModal">
+                <button type="button" class="dropdown-item" id="nameSearchBtn" data-toggle="modal"
+                        data-target="#findByNameModal">
                     <i class="fa fa-search-plus" aria-hidden="true"></i>
-                    日期搜索
+                    姓名搜索
                 </button>
-                <button type="button" class="dropdown-item" id="titleSearchBtn" data-toggle="modal"
+                <button type="button" class="dropdown-item" id="keywordSearchBtn" data-toggle="modal"
                         data-target="#findByKeywordModal">
                     <i class="fa fa-search-minus" aria-hidden="true"></i>
-                    标题搜索
+                    关键字搜索
                 </button>
             </div>
         </div>
@@ -106,7 +106,7 @@
                data-locale="zh_CN"
                data-show-toggle="true"
                data-show-columns="true"
-               data-sort-name="deadline"
+               data-sort-name="name"
                data-sort-order="asc"
                data-toolbar="#toolbar"
                data-id-field="id"
@@ -114,10 +114,11 @@
             <thead>
             <tr>
                 <th data-field="state" data-checkbox="true"></th>
-                <th data-field="title" data-sortable="true">标题</th>
-                <th data-field="deadline" data-sortable="true">截止时间</th>
-                <th data-field="site" data-sortable="true">地点</th>
-                <th data-field="note" data-sortable="true">备注</th>
+                <th data-field="name" data-sortable="true">姓名</th>
+                <th data-field="phone" data-sortable="true">电话</th>
+                <th data-field="email" data-sortable="true">电子邮件</th>
+                <th data-field="company" data-sortable="true">公司</th>
+                <th data-field="address" data-sortable="true">地址</th>
             </tr>
             </thead>
         </table>
@@ -132,20 +133,24 @@
                     <div class="modal-body">
                         <form class="form-group" id="insertForm">
                             <div class="form-group">
-                                <label for="insertTitle">标题</label>
-                                <input type="text" class="form-control" id="insertTitle" placeholder="">
+                                <label for="insertName">姓名</label>
+                                <input type="text" class="form-control" id="insertName" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="insertDeadline">截止时间</label>
-                                <input type="text" class="form-control" id="insertDeadline" placeholder="">
+                                <label for="insertPhone">电话</label>
+                                <input type="text" class="form-control" id="insertPhone" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="insertSite">地点</label>
-                                <input type="text" class="form-control" id="insertSite" placeholder="">
+                                <label for="insertEmail">电子邮件</label>
+                                <input type="text" class="form-control" id="insertEmail" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="insertNote">地点</label>
-                                <input type="text" class="form-control" id="insertNote" placeholder="">
+                                <label for="insertCompany">公司</label>
+                                <input type="text" class="form-control" id="insertCompany" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="insertAddress">地址</label>
+                                <input type="text" class="form-control" id="insertAddress" placeholder="">
                             </div>
                         </form>
                     </div>
@@ -167,20 +172,24 @@
                     <div class="modal-body">
                         <form class="form-group" id="updateForm">
                             <div class="form-group">
-                                <label for="updateTitle">标题</label>
-                                <input type="text" class="form-control" id="updateTitle" placeholder="">
+                                <label for="updateName">姓名</label>
+                                <input type="text" class="form-control" id="updateName" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="updateDeadline">截止时间</label>
-                                <input type="text" class="form-control" id="updateDeadline" placeholder="">
+                                <label for="updatePhone">电话</label>
+                                <input type="text" class="form-control" id="updatePhone" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="updateSite">地点</label>
-                                <input type="text" class="form-control" id="updateSite" placeholder="">
+                                <label for="updateEmail">电子邮件</label>
+                                <input type="text" class="form-control" id="updateEmail" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="updateNote">备注</label>
-                                <input type="text" class="form-control" id="updateNote" placeholder="">
+                                <label for="updateCompany">公司</label>
+                                <input type="text" class="form-control" id="updateCompany" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="updateAddress">地址</label>
+                                <input type="text" class="form-control" id="updateAddress" placeholder="">
                             </div>
                         </form>
                     </div>
@@ -192,21 +201,17 @@
             </div>
         </div>
 
-        <div class="modal fade" id="findByDateModal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="findByNameModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">按日期范围查找数据</h5>
+                        <h5 class="modal-title">按姓名查找数据</h5>
                     </div>
                     <div class="modal-body">
                         <form class="form-group" id="findByDateForm">
                             <div class="form-group">
-                                <label for="startDate">开始时间</label>
-                                <input type="text" class="form-control" id="startDate" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="endDate">结束时间</label>
-                                <input type="text" class="form-control" id="endDate" placeholder="">
+                                <label for="searchName">姓名</label>
+                                <input type="text" class="form-control" id="searchName" placeholder="">
                             </div>
                         </form>
                     </div>
@@ -251,19 +256,14 @@
 <script src="../vendor/js/bootstrap-table-locale-all.js"></script>
 <script src="../vendor/js/bootbox.min.js"></script>
 <script src="../vendor/js/bootbox.locales.min.js"></script>
-<script src="../vendor/js/jquery.datetimepicker.js"></script>
 
-<script src="../vendor/js/todo.js"></script>
+<script src="../vendor/js/contact.js"></script>
 <script>
     $(document).ready(function () {
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
-        $('#insertDeadline').datetimepicker();
-        $('#updateDeadline').datetimepicker();
-        $('#startDate').datetimepicker();
-        $('#endDate').datetimepicker();
 
         $('#logout').click(function () {
             $.ajax({
@@ -280,40 +280,6 @@
                 }
             })
         });
-
-        Date.prototype.pattern = function (fmt) {
-            var o = {
-                "M+": this.getMonth() + 1, //月份
-                "d+": this.getDate(), //日
-                "h+": this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时
-                "H+": this.getHours(), //小时
-                "m+": this.getMinutes(), //分
-                "s+": this.getSeconds(), //秒
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-                "S": this.getMilliseconds() //毫秒
-            };
-            var week = {
-                "0": "/u65e5",
-                "1": "/u4e00",
-                "2": "/u4e8c",
-                "3": "/u4e09",
-                "4": "/u56db",
-                "5": "/u4e94",
-                "6": "/u516d"
-            };
-            if (/(y+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            }
-            if (/(E+)/.test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "/u661f/u671f" : "/u5468") : "") + week[this.getDay() + ""]);
-            }
-            for (var k in o) {
-                if (new RegExp("(" + k + ")").test(fmt)) {
-                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-                }
-            }
-            return fmt;
-        };
     });
 </script>
 </body>

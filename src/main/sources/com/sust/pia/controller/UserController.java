@@ -90,8 +90,8 @@ public class UserController {
                              @RequestParam(value = "password") String password,
                              @RequestParam(value = "email") String email,
                              HttpServletRequest request,
-                             HttpServletResponse response){
-        User user = new User(0,username,password,email);
+                             HttpServletResponse response) {
+        User user = new User(0, username, password, email);
         log.debug(user.toString());
         log.debug("SAVE TO DB: " + user);
         JSONObject resultJson = new JSONObject();
@@ -131,9 +131,18 @@ public class UserController {
      * @Return java.lang.String
      */
     @PostMapping(value = "/logout")
-    public String logout(HttpServletRequest request) {
-        request.getSession().invalidate();
-        return "redirect:login";
+    @ResponseBody
+    public void logout(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject result = new JSONObject();
+        try {
+            request.getSession().invalidate();
+            result.put("flag", true);
+            log.debug("User logout");
+        } catch (Exception e) {
+            log.error(e.toString());
+            result.put("flag", false);
+        }
+        writeJSON2Response(result, response);
     }
 
 }

@@ -1,8 +1,5 @@
 package com.sust.pia.service;
 
-import com.sust.pia.model.ToDo;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**
@@ -18,10 +15,10 @@ public interface IMBaseService<T> {
 
     int update(T obj);
 
-    ToDo findById(Integer id);
+    T findById(Integer id);
 
     List<T> findAllData(Integer userId, Integer offset,
-                    Integer rows, String sort, String order);
+                        Integer rows, String sort, String order);
 
     List<T> findAll(Integer userId);
 

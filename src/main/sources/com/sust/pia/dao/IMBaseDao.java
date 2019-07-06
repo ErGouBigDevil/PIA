@@ -19,7 +19,7 @@ public interface IMBaseDao<T> {
 
     int update(T obj);
 
-    ToDo findById(Integer id);
+    T findById(Integer id);
 
     List<T> findAllData(@Param(value = "userId") Integer userId,
                         @Param(value = "offset") Integer offset,

@@ -4,9 +4,6 @@ function getPath() {
     var pos = curPath.indexOf(pathName);
     var localhostPath = curPath.substring(0, pos);
     var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-    // console.log(pathName)
-    // console.log(pathName.substr(1))
-    // console.log(projectName)
     return localhostPath + projectName;
 }
 
@@ -21,7 +18,7 @@ function initTable() {
     $('#table').bootstrapTable('destroy');
     $("#table").bootstrapTable({
         method: "get",
-        url: getPath() + "/todo/getAllInfo",
+        url: getPath() + "/contact/getAllInfo",
         pagination: true, //启动分页
         pageNumber: 1,
         pageSize: 10,
@@ -68,29 +65,27 @@ $('#refreshBtn').click(function () {
 
 // 添加信息
 $('#insertSave').click(function () {
-    var insertTitle = $('#insertTitle').val();
-    var insertDeadline = $('#insertDeadline').val();
-    console.log(insertDeadline + ":00");
-    var insertSite = $('#insertSite').val();
-    var insertNote = $('#insertNote').val();
-    if (insertDeadline == "")
-        insertDeadline = new Date().pattern("yyyy/MM/dd hh:mm:ss");
-    else
-        insertDeadline += ":00";
+    var insertName = $('#insertName').val();
+    var insertPhone = $('#insertPhone').val();
+    var insertEmail = $('#insertEmail').val();
+    var insertCompany = $('#insertCompany').val();
+    var insertAddress = $('#insertAddress').val();
+
 
     $.ajax({
         type: "post",
-        url: getPath() + "/todo/insertData",
+        url: getPath() + "/contact/insertData",
         async: false,
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify({
-            "toDoId": 0,
+            "contactId": 0,
             "userId": 0,
-            "title": insertTitle,
-            "deadline": insertDeadline,
-            "site": insertSite,
-            "note": insertNote
+            "name": insertName,
+            "phone": insertPhone,
+            "email": insertEmail,
+            "company": insertCompany,
+            "address": insertAddress,
         }),
         success: function (data) {
             if (data.flag) {
@@ -144,7 +139,7 @@ $('#removeBtn').click(function () {
     } else {
         var ids = '';
         $.each(rows, function () {
-            ids += this.toDoId + ",";
+            ids += this.contactId + ",";
         });
         ids = ids.substring(0, ids.length - 1);
 
@@ -164,7 +159,7 @@ $('#removeBtn').click(function () {
                 if (result) {
                     $.ajax({
                         type: 'POST',
-                        url: getPath() + "/todo/deleteByIds",
+                        url: getPath() + "/contact/deleteByIds",
                         data: {ids: ids},
                         dataType: "json",
                         success: function (data) {
@@ -212,40 +207,38 @@ $('#updateBtn').click(function () {
             locale: "zh_CN"
         });
     } else {
-        $('#updateTitle').val(rows[0].title);
-        $('#updateNote').val(rows[0].note);
-        $('#updateDeadline').val(rows[0].deadline);
-        $('#updateSite').val(rows[0].site);
+        $('#updateName').val(rows[0].name);
+        $('#updatePhone').val(rows[0].phone);
+        $('#updateEmail').val(rows[0].email);
+        $('#updateCompany').val(rows[0].company);
+        $('#updateAddress').val(rows[0].address);
         $('#updateModal').modal("toggle");
     }
 });
 
 $('#updateSave').click(function () {
     var rows = $('#table').bootstrapTable('getSelections');
-    var updateId = rows[0].toDoId;
-    var updateTitle = $('#updateTitle').val();
-    var updateDeadline = $('#updateDeadline').val();
-    var updateSite = $('#updateSite').val();
-    var updateNote = $('#updateNote').val();
-    if (updateDeadline == "")
-        updateDeadline = new Date().pattern("yyyy/MM/dd hh:mm:ss");
-    else
-        updateDeadline = updateDeadline.replace(/-/g, "/");
-
+    var updateId = rows[0].contactId;
+    var updateName = $('#updateName').val();
+    var updatePhone = $('#updatePhone').val();
+    var updateEmail = $('#updateEmail').val();
+    var updateCompany = $('#updateCompany').val();
+    var updateAddress = $('#updateAddress').val();
 
     $.ajax({
         type: "post",
-        url: getPath() + "/todo/updateData",
+        url: getPath() + "/contact/updateData",
         async: false,
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify({
-            "toDoId": updateId,
+            "contactId": updateId,
             "userId": 0,
-            "title": updateTitle,
-            "deadline": updateDeadline,
-            "site": updateSite,
-            "note": updateNote
+            "name": updateName,
+            "phone": updatePhone,
+            "email": updateEmail,
+            "company": updateCompany,
+            "address": updateAddress,
         }),
         success: function (data) {
             if (data.flag) {
@@ -289,29 +282,24 @@ $('#updateSave').click(function () {
 });
 
 
-// 日期搜索
+// 姓名搜索
 $('#findByDateBtn').click(function () {
-    var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
+    var searchName = $("#searchName").val();
     $.ajax({
         type: "post",
-        url: getPath() + "/todo/findByDate",
+        url: getPath() + "/contact/findByName",
         async: false,
         dataType: 'json',
-        data: {startDate: startDate + ":00", endDate: endDate + ":00"},
+        data: {searchName: searchName},
         success: function (data) {
             console.log(data);
             if (data.total != 0) {
-                $('#findByDateModal').modal("hide");
-                $("#startDate").val("");
-                $("#endDate").val("");
+                $('#findByNameModal').modal("hide");
                 $('#table').bootstrapTable('destroy');
                 $('#table').bootstrapTable();
                 $('#table').bootstrapTable('load', data);
             } else {
-                $('#findByDateModal').modal("hide");
-                $("#startDate").val("");
-                $("#endDate").val("");
+                $('#findByNameModal').modal("hide");
                 bootbox.alert({
                     centerVertical: true,
                     title: "失败",
@@ -339,7 +327,7 @@ $('#fuzzSearch').click(function () {
     var keyWord = $('#searchKeyWord').val();
     $.ajax({
         type: "post",
-        url: getPath() + "/todo/findByKeyWord",
+        url: getPath() + "/contact/findByKeyWord",
         async: false,
         data: {keyword: keyWord},
         dataType: "json",

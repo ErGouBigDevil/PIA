@@ -1,4 +1,5 @@
 CREATE TABLE IF NOT EXISTS contact(
+    contact_id INT(32) PRIMARY KEY AUTO_INCREMENT,
     user_id INT(32) NOT NULL,
     name varchar(50),
     phone varchar(13),
