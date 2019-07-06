@@ -15,6 +15,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -103,6 +107,116 @@ public class ToDoController {
         writeJSON2Response(result, response);
     }
 
+
+    /**
+     * @Description
+     * @Author Haodong Zhao
+     * @Date 2019/7/6 13:32
+     * @Param ids
+     * @Param response
+     * @Return void
+     */
+    @PostMapping(value = "/deleteByIds")
+    @ResponseBody
+    public void deleteByIds(@RequestParam(value = "ids") String ids, HttpServletResponse response) {
+        log.debug("SERVER[ToDoController] Get ids: " + ids);
+        String[] idArray = ids.split(",");
+        JSONObject result = new JSONObject();
+        try {
+            for (String id : idArray)
+                toDoService.delete(Integer.valueOf(id));
+            result.put("flag", true);
+        } catch (Exception e) {
+            result.put("flag", false);
+        }
+        writeJSON2Response(result, response);
+    }
+
+    /**
+     * @Description
+     * @Author Haodong Zhao
+     * @Date 2019/7/6 13:49
+     * @Param toDo
+     * @Param response
+     * @Return void
+     */
+    @PostMapping(value = "/updateData")
+    @ResponseBody
+    public void updateData(@RequestBody ToDo toDo,
+                           HttpServletResponse response, HttpServletRequest request) {
+        toDo.setUserId(((User) request.getSession().getAttribute("userObj")).getId());
+        JSONObject result = new JSONObject();
+        if (toDoService.update(toDo) > 0)
+            result.put("flag", true);
+        else
+            result.put("flag", false);
+        writeJSON2Response(result, response);
+    }
+
+
+    /**
+     * @Description
+     * @Author Haodong Zhao
+     * @Date 2019/7/6 15:01
+     * @Param startDate
+     * @Param endDate
+     * @Param request
+     * @Param response
+     * @Return void
+     */
+    @PostMapping(value = "/findByDate")
+    @ResponseBody
+    public void findByTime(@RequestParam(value = "startDate") String startDate,
+                           @RequestParam(value = "endDate") String endDate,
+                           HttpServletRequest request, HttpServletResponse response) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        User user = (User) request.getSession().getAttribute("userObj");
+        endDate = endDate.replaceAll("/", "-");
+        startDate = startDate.replaceAll("/", "-");
+        log.debug("SERVER[ToDoController-findByDate] Get user: " + user);
+        DataList<ToDo> toDoList = new DataList<>();
+        try {
+            List<ToDo> list = toDoService.findByTime(format.parse(startDate), format.parse(endDate), user.getId());
+            if (list != null) {
+                toDoList.setRows(list);
+                toDoList.setTotal(list.size());
+            }
+        } catch (Exception e) {
+            log.error("SERVER[ToDoController]: " + e.toString());
+
+        }
+
+        writeJSON2Response(toDoList.toString(), response);
+    }
+
+    /**
+     * @Description
+     * @Author Haodong Zhao
+     * @Date 2019/7/6 15:39
+     * @Param keyword
+     * @Param response
+     * @Param request
+     * @Return void
+     */
+    @PostMapping(value = "/findByKeyWord")
+    @ResponseBody
+    public void findByKeyWord(@RequestParam(value = "keyword") String keyword,
+                              HttpServletResponse response, HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("userObj");
+        DataList<ToDo> toDoList = new DataList<>();
+        try {
+            List<ToDo> list = toDoService.findByKeyword(user.getId(), keyword);
+            toDoList.setRows(list);
+            toDoList.setTotal(list.size());
+
+        } catch (Exception e) {
+            log.error("SERVER[ToDoController]: " + e.toString());
+
+        }
+        writeJSON2Response(toDoList.toString(), response);
+
+
+    }
 
 
 }

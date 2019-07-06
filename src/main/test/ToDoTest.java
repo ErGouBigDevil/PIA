@@ -90,8 +90,11 @@ public class ToDoTest {
 
     @Test
     public void testDate() throws ParseException {
-        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("20190103105927");
-        System.out.println(date.toString());
+//        Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("20190103105927");
+//        System.out.println(date.toString());
+        Date date2 = new Date("2019/01/03 10:59:27");
+        System.out.println(date2.toString());
+
     }
 
     @Test

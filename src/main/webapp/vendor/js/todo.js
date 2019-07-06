@@ -58,69 +58,316 @@ function initTable() {
             }, 2000);
         },
     });
-
-    // 刷新表格
-    $('#refreshBtn').click(function () {
-        initTable();
-    });
-
-    // 添加信息
-    $('#insertSave').click(function () {
-        var insertTitle = $('#insertTitle').val();
-        var insertDeadline = $('#insertDeadline').val();
-        console.log(insertDeadline+":00");
-        var insertSite = $('#insertSite').val();
-        var insertNote = $('#insertNote').val();
-
-        $.ajax({
-            type: "post",
-            url: getPath() + "/todo/insertData",
-            async: false,
-            dataType: 'json',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                "toDoId": 0,
-                "userId": 0,
-                "title": insertTitle,
-                "deadline": insertDeadline + ":00",
-                "site": insertSite,
-                "note": insertNote
-            }),
-            success: function (data) {
-                if (data.flag) {
-                    $('#insertModal').modal("hide");
-                    $('#insertTitle').val('');
-                    $('#insertDeadline').val('');
-                    $('#insertSite').val('');
-                    $('#insertNote').val('');
-                    bootbox.alert({
-                        centerVertical: true,
-                        title: "成功",
-                        message: "添加成功!",
-                        locale: "zh_CN"
-                    })
-                    initTable();
-                } else {
-                    bootbox.alert({
-                        centerVertical: true,
-                        title: "失败",
-                        message: "添加失败!",
-                        locale: "zh_CN"
-                    })
-                    initTable();
-                }
-
-            },
-            error: function () {
-                $('#mResult').addClass('alert-danger');
-                $('#mResult').html("由于服务器原因，添加失败!");
-                setTimeout(function () {
-                    $('#mResult').removeClass('alert-danger');
-                    $('#mResult').html('');
-                }, 2000);
-            }
-        })
-
-    });
-
 }
+
+
+// 刷新表格
+$('#refreshBtn').click(function () {
+    initTable();
+});
+
+// 添加信息
+$('#insertSave').click(function () {
+    var insertTitle = $('#insertTitle').val();
+    var insertDeadline = $('#insertDeadline').val();
+    console.log(insertDeadline + ":00");
+    var insertSite = $('#insertSite').val();
+    var insertNote = $('#insertNote').val();
+    if (insertDeadline == "")
+        insertDeadline = new Date().pattern("yyyy/MM/dd hh:mm:ss");
+    else
+        insertDeadline += ":00";
+
+    $.ajax({
+        type: "post",
+        url: getPath() + "/todo/insertData",
+        async: false,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "toDoId": 0,
+            "userId": 0,
+            "title": insertTitle,
+            "deadline": insertDeadline,
+            "site": insertSite,
+            "note": insertNote
+        }),
+        success: function (data) {
+            if (data.flag) {
+                $('#insertModal').modal("hide");
+                $('#insertTitle').val('');
+                $('#insertDeadline').val('');
+                $('#insertSite').val('');
+                $('#insertNote').val('');
+                bootbox.alert({
+                    centerVertical: true,
+                    title: "成功",
+                    message: "添加成功!",
+                    locale: "zh_CN"
+                })
+                initTable();
+            } else {
+                bootbox.alert({
+                    centerVertical: true,
+                    title: "失败",
+                    message: "添加失败!",
+                    locale: "zh_CN"
+                })
+                initTable();
+            }
+
+        },
+        error: function () {
+            $('#mResult').addClass('alert-danger');
+            $('#mResult').html("由于服务器原因，添加失败!");
+            setTimeout(function () {
+                $('#mResult').removeClass('alert-danger');
+                $('#mResult').html('');
+            }, 2000);
+        }
+    })
+
+});
+
+
+// 删除信息
+$('#removeBtn').click(function () {
+    var rows = $('#table').bootstrapTable('getSelections');
+    if (rows.length == 0) {
+        bootbox.alert({
+            centerVertical: true,
+            title: "错误",
+            message: "删除操作至少需要选择一条数据!",
+            locale: "zh_CN"
+        });
+
+    } else {
+        var ids = '';
+        $.each(rows, function () {
+            ids += this.toDoId + ",";
+        });
+        ids = ids.substring(0, ids.length - 1);
+
+        bootbox.confirm({
+            centerVertical: true,
+            title: "删除确认",
+            message: "确认删除所选?",
+            buttons: {
+                cancel: {
+                    label: '<i class="fa fa-times"></i> Cancel'
+                },
+                confirm: {
+                    label: '<i class="fa fa-check"></i> Confirm'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: 'POST',
+                        url: getPath() + "/todo/deleteByIds",
+                        data: {ids: ids},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.flag) {
+                                bootbox.alert({
+                                    centerVertical: true,
+                                    title: "成功",
+                                    message: "删除成功!",
+                                    locale: "zh_CN"
+                                });
+                                initTable();
+                            } else {
+                                bootbox.alert({
+                                    centerVertical: true,
+                                    title: "失败",
+                                    message: "删除失败!",
+                                    locale: "zh_CN"
+                                });
+                                initTable();
+                            }
+                        },
+                        error: function (data) {
+                            $('#mResult').addClass('alert-danger');
+                            $('#mResult').html("由于服务器原因，删除失败!");
+                            setTimeout(function () {
+                                $('#mResult').removeClass('alert-danger');
+                                $('#mResult').html('');
+                            }, 2000);
+                        },
+                    });
+                }
+            }
+        });
+    }
+});
+
+// 更新信息
+$('#updateBtn').click(function () {
+    var rows = $('#table').bootstrapTable('getSelections');
+    if (rows.length != 1) {
+        bootbox.alert({
+            centerVertical: true,
+            title: "错误",
+            message: "修改操作只能选择一条数据！",
+            locale: "zh_CN"
+        });
+    } else {
+        $('#updateTitle').val(rows[0].title);
+        $('#updateNote').val(rows[0].note);
+        $('#updateDeadline').val(rows[0].deadline);
+        $('#updateSite').val(rows[0].site);
+        $('#updateModal').modal("toggle");
+    }
+});
+
+$('#updateSave').click(function () {
+    var rows = $('#table').bootstrapTable('getSelections');
+    var updateId = rows[0].toDoId;
+    var updateTitle = $('#updateTitle').val();
+    var updateDeadline = $('#updateDeadline').val();
+    var updateSite = $('#updateSite').val();
+    var updateNote = $('#updateNote').val();
+    if (updateDeadline == "")
+        updateDeadline = new Date().pattern("yyyy/MM/dd hh:mm:ss");
+    else
+        updateDeadline = updateDeadline.replace(/-/g, "/");
+
+
+    $.ajax({
+        type: "post",
+        url: getPath() + "/todo/updateData",
+        async: false,
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "toDoId": updateId,
+            "userId": 0,
+            "title": updateTitle,
+            "deadline": updateDeadline,
+            "site": updateSite,
+            "note": updateNote
+        }),
+        success: function (data) {
+            if (data.flag) {
+                $('#updateModal').modal("hide");
+                $('#updateTitle').val('');
+                $('#updateDeadline').val('');
+                $('#updateSite').val('');
+                $('#updateNote').val('');
+                bootbox.alert({
+                    centerVertical: true,
+                    title: "成功",
+                    message: "修改成功!",
+                    locale: "zh_CN"
+                })
+                initTable();
+            } else {
+                bootbox.alert({
+                    centerVertical: true,
+                    title: "失败",
+                    message: "修改失败!",
+                    locale: "zh_CN"
+                });
+                initTable();
+            }
+
+        },
+        error: function () {
+            $('#updateModal').modal("hide");
+            $('#updateTitle').val('');
+            $('#updateDeadline').val('');
+            $('#updateSite').val('');
+            $('#updateNote').val('');
+            $('#mResult').addClass('alert-danger');
+            $('#mResult').html("由于服务器原因，添加失败!");
+            setTimeout(function () {
+                $('#mResult').removeClass('alert-danger');
+                $('#mResult').html('');
+            }, 200);
+        }
+    })
+});
+
+
+// 日期搜索
+$('#findByDateBtn').click(function () {
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
+    $.ajax({
+        type: "post",
+        url: getPath() + "/todo/findByDate",
+        async: false,
+        dataType: 'json',
+        data: {startDate: startDate + ":00", endDate: endDate + ":00"},
+        success: function (data) {
+            console.log(data);
+            if (data.total != 0) {
+                $('#findByDateModal').modal("hide");
+                $("#startDate").val("");
+                $("#endDate").val("");
+                $('#table').bootstrapTable('destroy');
+                $('#table').bootstrapTable();
+                $('#table').bootstrapTable('load', data);
+            } else {
+                $('#findByDateModal').modal("hide");
+                $("#startDate").val("");
+                $("#endDate").val("");
+                bootbox.alert({
+                    centerVertical: true,
+                    title: "失败",
+                    message: "搜索失败!",
+                    locale: "zh_CN"
+                })
+                initTable();
+            }
+
+        },
+        error: function () {
+            $('#mResult').addClass('alert-danger');
+            $('#mResult').html("由于服务器原因，搜索失败!");
+            setTimeout(function () {
+                $('#mResult').removeClass('alert-danger');
+                $('#mResult').html('');
+            }, 2000);
+        }
+    })
+});
+
+
+// 模糊搜索
+$('#fuzzSearch').click(function () {
+    var keyWord = $('#searchKeyWord').val();
+    $.ajax({
+        type: "post",
+        url: getPath() + "/todo/findByKeyWord",
+        async: false,
+        data: {keyword: keyWord},
+        dataType: "json",
+        success: function (data) {
+            if (data.total != 0) {
+                $('#findByKeywordModal').modal("hide");
+                $('#searchKeyWord').val("");
+                $('#table').bootstrapTable('destroy');
+                $('#table').bootstrapTable();
+                $('#table').bootstrapTable('load', data);
+            } else {
+                bootbox.alert({
+                    centerVertical: true,
+                    title: "失败",
+                    message: "搜索失败!",
+                    locale: "zh_CN"
+                })
+                initTable();
+            }
+        },
+        error: function () {
+            $('#mResult').addClass('alert-danger');
+            $('#mResult').html("由于服务器原因，搜索失败!");
+            setTimeout(function () {
+                $('#mResult').removeClass('alert-danger');
+                $('#mResult').html('');
+            }, 2000);
+        }
+    })
+});
+
