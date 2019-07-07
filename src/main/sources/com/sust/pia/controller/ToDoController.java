@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.controller
- * @Description
+ * @Description 与待办数据相关的Controller层 实现对代办数据的CRUD
  * @Author Haodong Zhao
  * @Datetime 2019/7/5 18:43
  */
@@ -33,7 +33,7 @@ public class ToDoController {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * @Description
+     * @Description 传输JSON数据至前端
      * @Author Haodong Zhao
      * @Date 2019/7/5 19:03
      * @Param out
@@ -51,7 +51,7 @@ public class ToDoController {
     }
 
     /**
-     * @Description
+     * @Description 获取分页数据
      * @Author Haodong Zhao
      * @Date 2019/7/5 19:04
      * @Param limit
@@ -82,7 +82,7 @@ public class ToDoController {
     }
 
     /**
-     * @Description
+     * @Description 插入数据
      * @Author Haodong Zhao
      * @Date 2019/7/5 23:47
      * @Param toDo
@@ -106,7 +106,7 @@ public class ToDoController {
 
 
     /**
-     * @Description
+     * @Description 按照id删除 支持同时删除多个id
      * @Author Haodong Zhao
      * @Date 2019/7/6 13:32
      * @Param ids
@@ -130,7 +130,7 @@ public class ToDoController {
     }
 
     /**
-     * @Description
+     * @Description 更新数据
      * @Author Haodong Zhao
      * @Date 2019/7/6 13:49
      * @Param toDo
@@ -152,7 +152,7 @@ public class ToDoController {
 
 
     /**
-     * @Description
+     * @Description 按照日期查找信息
      * @Author Haodong Zhao
      * @Date 2019/7/6 15:01
      * @Param startDate
@@ -187,7 +187,7 @@ public class ToDoController {
     }
 
     /**
-     * @Description
+     * @Description 按照关键字查找数据
      * @Author Haodong Zhao
      * @Date 2019/7/6 15:39
      * @Param keyword

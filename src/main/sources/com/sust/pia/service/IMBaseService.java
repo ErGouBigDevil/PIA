@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.service
- * @Description
+ * @Description 数据管理基础Service接口
  * @Author Haodong Zhao
  * @Datetime 2019/7/5 15:14
  */

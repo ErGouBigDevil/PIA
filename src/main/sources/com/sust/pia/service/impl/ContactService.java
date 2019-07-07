@@ -2,7 +2,6 @@ package com.sust.pia.service.impl;
 
 import com.sust.pia.dao.IContactDao;
 import com.sust.pia.model.Contact;
-import com.sust.pia.model.ToDo;
 import com.sust.pia.service.IContactService;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.service.impl
- * @Description
+ * @Description 联系管理Sevice层
  * @Author Haodong Zhao
  * @Datetime 2019/7/6 23:37
  */

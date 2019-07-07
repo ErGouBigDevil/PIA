@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.service.impl
- * @Description
+ * @Description 待办事务管理Service层
  * @Author Haodong Zhao
  * @Datetime 2019/7/5 15:12
  */

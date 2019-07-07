@@ -1,4 +1,3 @@
-import com.sust.pia.model.Contact;
 import com.sust.pia.model.Pass;
 import com.sust.pia.service.IPassService;
 import org.junit.Test;
@@ -11,7 +10,7 @@ import java.util.List;
 
 /**
  * @Package PACKAGE_NAME
- * @Description
+ * @Description 密码管理测试
  * @Author Haodong Zhao
  * @Datetime 2019/7/7 13:42
  */

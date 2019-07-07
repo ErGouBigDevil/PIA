@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Package com.sust.pia.util
- * @Description 登录权限拦截器
+ * @Description 权限拦截器
  * @Author Haodong Zhao
  * @Datetime 2019/7/4 16:24
  */

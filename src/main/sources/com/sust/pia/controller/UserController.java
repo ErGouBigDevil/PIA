@@ -30,7 +30,7 @@ public class UserController {
 
 
     /**
-     * @Description
+     * @Description 传输JSON数据至前端
      * @Author Haodong Zhao
      * @Date 2019/7/4 16:42
      * @Param out

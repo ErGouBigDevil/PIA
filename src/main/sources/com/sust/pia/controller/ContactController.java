@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.controller
- * @Description
+ * @Description 联系人管理Controller层
  * @Author Haodong Zhao
  * @Datetime 2019/7/7 0:27
  */

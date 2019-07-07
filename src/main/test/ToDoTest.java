@@ -1,6 +1,5 @@
 import com.sust.pia.model.ToDo;
 import com.sust.pia.service.IToDoService;
-import com.sust.pia.service.IUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

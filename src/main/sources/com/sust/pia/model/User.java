@@ -7,12 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 /**
  * @Author Haodong Zhao
  * @Package com.sust.pia.model
- * @Description 用户信息持久化类
+ * @Description 用户信息类
  * @Datetime 2019/7/3 10:51
  */
 
@@ -22,25 +20,16 @@ import java.util.List;
 public class User {
     @Setter
     @Getter
-    private Integer id;
+    private Integer id; // 用户id
     @Setter
     @Getter
-    private String username;
+    private String username; // 用户名
     @Setter
     @Getter
-    private String password;
+    private String password; // 用户密码
     @Setter
     @Getter
-    private String emailAddress;
-//    @Setter
-//    @Getter
-//    private List<Contact> contacts;
-//    @Setter
-//    @Getter
-//    private List<ToDo> toDoList;
-//    @Setter
-//    @Getter
-//    private List<Pass> passList;
+    private String emailAddress; // 用户地址
 
     @Override
     public String toString() {

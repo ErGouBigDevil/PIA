@@ -10,7 +10,7 @@ import lombok.Setter;
 /**
  * @Author Haodong Zhao
  * @Package com.sust.pia.model
- * @Description 联系人持久化类
+ * @Description 联系人类
  * @Datetime 2019/7/3 10:53
  */
 
@@ -19,25 +19,25 @@ import lombok.Setter;
 public class Contact {
     @Setter
     @Getter
-    private Integer contactId;
+    private Integer contactId; // 联系人信息id
     @Setter
     @Getter
-    private Integer userId;
+    private Integer userId; // 用户id
     @Setter
     @Getter
-    private String name;
+    private String name; // 联系人姓名
     @Setter
     @Getter
-    private String phone;
+    private String phone; // 联系人电话
     @Setter
     @Getter
-    private String email;
+    private String email; // 联系人电子邮件
     @Setter
     @Getter
-    private String company;
+    private String company; // 联系人公司
     @Setter
     @Getter
-    private String address;
+    private String address; // 联系人地址
 
     @Override
     public String toString() {

@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 /**
  * @Package PACKAGE_NAME
- * @Description 测试User相关方法
+ * @Description 测试User管理相关函数
  * @Author Haodong Zhao
  * @Datetime 2019/7/4 10:57
  */

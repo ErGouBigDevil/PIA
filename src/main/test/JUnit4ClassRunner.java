@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 /**
  * @Author Haodong Zhao
  * @Package com.sust.pia.model
- * @Description 联系人持久化类
+ * @Description 测试日志配置类
  * @Date 2019/7/3 10:53
  */
 public class JUnit4ClassRunner extends SpringJUnit4ClassRunner {

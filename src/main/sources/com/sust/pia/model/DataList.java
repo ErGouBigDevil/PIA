@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.model
- * @Description
+ * @Description 数据表类 便于按照格式传至前端
  * @Author Haodong Zhao
  * @Datetime 2019/7/5 18:49
  */

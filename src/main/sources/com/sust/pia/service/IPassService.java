@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.service
- * @Description
+ * @Description 密码管理Service接口
  * @Author Haodong Zhao
  * @Datetime 2019/7/7 13:37
  */

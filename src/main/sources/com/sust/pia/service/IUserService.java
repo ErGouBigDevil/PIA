@@ -4,7 +4,7 @@ import com.sust.pia.model.User;
 
 /**
  * @Package com.sust.pia.service
- * @Description
+ * @Description 与User数据相关的Service接口
  * @Author Haodong Zhao
  * @Datetime 2019/7/4 10:58
  */

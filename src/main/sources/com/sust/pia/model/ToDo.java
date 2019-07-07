@@ -14,7 +14,7 @@ import java.util.Date;
 /**
  * @Author Haodong Zhao
  * @Package com.sust.pia.model
- * @Description 日常事务持久化类
+ * @Description 日常事务类
  * @Datetime 2019/7/3 10:53
  */
 
@@ -23,10 +23,10 @@ import java.util.Date;
 public class ToDo {
     @Setter
     @Getter
-    private Integer toDoId;
+    private Integer toDoId; // 事务id
     @Setter
     @Getter
-    private Integer userId;
+    private Integer userId; // 用户id
     @Setter
     @Getter
     private String title;   // 事务标题

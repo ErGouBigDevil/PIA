@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Package com.sust.pia.service.impl
- * @Description
+ * @Description 与待办事务相关的Service接口
  * @Author Haodong Zhao
  * @Datetime 2019/7/5 15:12
  */

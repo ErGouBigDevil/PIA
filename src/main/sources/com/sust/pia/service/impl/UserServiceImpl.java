@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * @Package com.sust.pia.service.impl
- * @Description
+ * @Description 用户管理Service层
  * @Author Haodong Zhao
  * @Datetime 2019/7/4 11:09
  */
@@ -21,7 +21,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findByNameAndPassword(String username, String password) {
-        return userDao.findByNameAndPassword(username,password);
+        return userDao.findByNameAndPassword(username, password);
     }
 
     @Override
