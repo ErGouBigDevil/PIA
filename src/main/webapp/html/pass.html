@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>PIA | Contacts</title>
+    <title>PIA | PasswordList</title>
 
     <link rel="stylesheet" href="../vendor/css/bootstrap.css">
     <link rel="stylesheet" href="../vendor/css/admin_page.css">
@@ -43,10 +43,7 @@
         </ul>
         <ul class="list-unstyled CTAs">
             <li>
-                <button class="btn btn-info btn-block" id="logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    退出登录
-                </button>
+                <button class="btn btn-info btn-block" id="logout">退出登录</button>
             </li>
 
         </ul>
@@ -83,22 +80,11 @@
                 <i class="fas fa-edit"></i>
                 修改
             </button>
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="searchButtons" data-toggle="dropdown">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                搜索
+            <button type="button" class="btn btn-dark" id="websiteSearchBtn" data-toggle="modal"
+                    data-target="#findByWebsiteModal">
+                <i class="fa fa-search-plus" aria-hidden="true"></i>
+                按网站搜索
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <button type="button" class="dropdown-item" id="nameSearchBtn" data-toggle="modal"
-                        data-target="#findByNameModal">
-                    <i class="fa fa-search-plus" aria-hidden="true"></i>
-                    姓名搜索
-                </button>
-                <button type="button" class="dropdown-item" id="keywordSearchBtn" data-toggle="modal"
-                        data-target="#findByKeywordModal">
-                    <i class="fa fa-search-minus" aria-hidden="true"></i>
-                    关键字搜索
-                </button>
-            </div>
         </div>
         <table id="table"
                data-toggle="true"
@@ -106,7 +92,7 @@
                data-locale="zh_CN"
                data-show-toggle="true"
                data-show-columns="true"
-               data-sort-name="name"
+               data-sort-name="website"
                data-sort-order="asc"
                data-toolbar="#toolbar"
                data-id-field="id"
@@ -114,11 +100,9 @@
             <thead>
             <tr>
                 <th data-field="state" data-checkbox="true"></th>
-                <th data-field="name" data-sortable="true">姓名</th>
-                <th data-field="phone" data-sortable="true">电话</th>
-                <th data-field="email" data-sortable="true">电子邮件</th>
-                <th data-field="company" data-sortable="true">公司</th>
-                <th data-field="address" data-sortable="true">地址</th>
+                <th data-field="website" data-sortable="true">网站</th>
+                <th data-field="username" data-sortable="true">用户名</th>
+                <th data-field="password" data-sortable="true">密码</th>
             </tr>
             </thead>
         </table>
@@ -133,24 +117,16 @@
                     <div class="modal-body">
                         <form class="form-group" id="insertForm">
                             <div class="form-group">
-                                <label for="insertName">姓名</label>
-                                <input type="text" class="form-control" id="insertName" placeholder="">
+                                <label for="insertWebsite">网站</label>
+                                <input type="text" class="form-control" id="insertWebsite" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="insertPhone">电话</label>
-                                <input type="text" class="form-control" id="insertPhone" placeholder="">
+                                <label for="insertUsername">用户名</label>
+                                <input type="text" class="form-control" id="insertUsername" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="insertEmail">电子邮件</label>
-                                <input type="text" class="form-control" id="insertEmail" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="insertCompany">公司</label>
-                                <input type="text" class="form-control" id="insertCompany" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="insertAddress">地址</label>
-                                <input type="text" class="form-control" id="insertAddress" placeholder="">
+                                <label for="insertPassword">密码</label>
+                                <input type="text" class="form-control" id="insertPassword" placeholder="">
                             </div>
                         </form>
                     </div>
@@ -172,25 +148,18 @@
                     <div class="modal-body">
                         <form class="form-group" id="updateForm">
                             <div class="form-group">
-                                <label for="updateName">姓名</label>
-                                <input type="text" class="form-control" id="updateName" placeholder="">
+                                <label for="updateWebsite">网站</label>
+                                <input type="text" class="form-control" id="updateWebsite" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="updatePhone">电话</label>
-                                <input type="text" class="form-control" id="updatePhone" placeholder="">
+                                <label for="updateUsername">用户名</label>
+                                <input type="text" class="form-control" id="updateUsername" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="updateEmail">电子邮件</label>
-                                <input type="text" class="form-control" id="updateEmail" placeholder="">
+                                <label for="updatePassword">密码</label>
+                                <input type="text" class="form-control" id="updatePassword" placeholder="">
                             </div>
-                            <div class="form-group">
-                                <label for="updateCompany">公司</label>
-                                <input type="text" class="form-control" id="updateCompany" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <label for="updateAddress">地址</label>
-                                <input type="text" class="form-control" id="updateAddress" placeholder="">
-                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -201,40 +170,18 @@
             </div>
         </div>
 
-        <div class="modal fade" id="findByNameModal" tabindex="-1" role="dialog">
+
+        <div class="modal fade" id="findByWebsiteModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">按姓名查找数据</h5>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-group" id="findByDateForm">
-                            <div class="form-group">
-                                <label for="searchName">姓名</label>
-                                <input type="text" class="form-control" id="searchName" placeholder="">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" id="findByDateBtn">搜索</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="modal fade" id="findByKeywordModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">关键字搜索</h5>
+                        <h5 class="modal-title">按网站名搜索</h5>
                     </div>
                     <div class="modal-body">
                         <form class="form-group" id="searchForm">
                             <div class="form-group">
-                                <label for="searchKeyWord">搜索关键字</label>
-                                <input type="text" class="form-control" id="searchKeyWord" placeholder="">
+                                <label for="searchWebsite">搜索网站名关键字</label>
+                                <input type="text" class="form-control" id="searchWebsite" placeholder="">
                             </div>
                         </form>
                     </div>
@@ -256,14 +203,19 @@
 <script src="../vendor/js/bootstrap-table-locale-all.js"></script>
 <script src="../vendor/js/bootbox.min.js"></script>
 <script src="../vendor/js/bootbox.locales.min.js"></script>
+<script src="../vendor/js/jquery.datetimepicker.js"></script>
 
-<script src="../vendor/js/contact.js"></script>
+<script src="../vendor/js/pass.js"></script>
 <script>
     $(document).ready(function () {
 
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
+        $('#insertDeadline').datetimepicker();
+        $('#updateDeadline').datetimepicker();
+        $('#startDate').datetimepicker();
+        $('#endDate').datetimepicker();
 
         $('#logout').click(function () {
             $.ajax({

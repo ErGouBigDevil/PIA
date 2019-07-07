@@ -28,10 +28,10 @@ public class Pass {
     private String website;   // 网站名称
     @Setter
     @Getter
-    private String webUsername;  // 该网站用户名
+    private String username;  // 该网站用户名
     @Setter
     @Getter
-    private String webPassword;  // 该网站密码
+    private String password;  // 该网站密码
 
     @Override
     public String toString() {

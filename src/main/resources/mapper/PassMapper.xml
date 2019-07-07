@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sust.pia.dao.IPassDao">
+
+    <resultMap type="com.sust.pia.model.Pass" id="PassResult">
+        <id column="pass_id" jdbcType="INTEGER" property="passId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="website" jdbcType="VARCHAR" property="website"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.sust.pia.model.Pass">
+        insert into pass(user_id, website,username,password)
+        values(#{userId},#{website},#{username},#{password})
+    </insert>
+
+
+    <delete id="delete" parameterType="Integer">
+        delete from pass where pass_id=#{id}
+    </delete>
+
+
+    <update id="update" parameterType="com.sust.pia.model.Pass">
+        update pass
+        set user_id=#{userId},website=#{website},username=#{username},password=#{password}
+	    where pass_id=#{passId}
+    </update>
+
+
+    <select id="findById" resultMap="PassResult"
+            parameterType="Integer">
+        select * from pass where pass_id=#{id}
+    </select>
+
+
+    <select id="findAllData" resultMap="PassResult"
+            parameterType="Integer">
+        select * from pass
+        where user_id=#{userId}
+        order by ${sort} ${order}
+        limit #{offset},#{rows}
+
+    </select>
+
+    <select id="findAll" resultMap="PassResult"
+            parameterType="Integer">
+        select * from pass where user_id=#{userId}
+    </select>
+
+
+    <select id="count" resultType="Integer">
+        select COUNT(*) from pass where user_id=#{userId}
+    </select>
+
+
+    <select id="findByWebsite" resultMap="PassResult">
+        select * from pass where website like concat('%',#{website},'%') and user_id=#{userId}
+    </select>
+
+
+</mapper>
