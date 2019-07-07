@@ -29,30 +29,30 @@ public class AuthorityInterceptor implements HandlerInterceptor {
 
         boolean flag = false; // 默认用户没有登录
         String servletPath = request.getServletPath(); // 获得请求的ServletPath
-        log.debug("SERVER[AuthorityInterceptor] ServletPath: " + servletPath);
+//        log.debug("SERVER[AuthorityInterceptor] ServletPath: " + servletPath);
         String requestUri = request.getRequestURI(); //请求完整路径，可用于登陆后跳转
         String contextPath = request.getContextPath();  //项目下完整路径
         String url = requestUri.substring(contextPath.length()); //请求页面
-        log.debug("SERVER[AuthorityInterceptor] Request Uri: " + requestUri);
-        log.debug("SERVER[AuthorityInterceptor] Url: " + url);
+//        log.debug("SERVER[AuthorityInterceptor] Request Uri: " + requestUri);
+//        log.debug("SERVER[AuthorityInterceptor] Url: " + url);
 
         //判断请求是否需要拦截
         for (String s : IGNORE_URI) {
             if (servletPath.contains(s)) {
-                log.debug("SERVER[AuthorityInterceptor] do not intercept");
+//                log.debug("SERVER do not intercept");
                 return true;
             }
         }
 
-        log.debug("=======SERVER[AuthorityInterceptor] intercept");
+        log.debug("SERVER intercept");
         User user = (User) request.getSession().getAttribute("userObj");
         if (user == null) {
-            log.debug("SERVER[AuthorityInterceptor] do not find user");
-            log.debug("SERVER[AuthorityInterceptor] to " + "index.html");
+            log.debug("SERVER do not find user");
+            log.debug("SERVER to " + "index.html");
             //request.getRequestDispatcher("/index.html").forward(request, response);
             response.sendRedirect(contextPath + "/index.html");
         } else {
-            log.debug("SERVER[AuthorityInterceptor] Get User: " + user.toString());
+            log.debug("SERVER Get User: " + user.toString());
             flag = true;
         }
 

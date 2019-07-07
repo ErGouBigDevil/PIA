@@ -33,7 +33,7 @@ public class ToDo {
     @Getter
     @Setter
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    @JsonFormat(pattern="yyyy/MM/dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
     private Date deadline;  // 事务截止时间
     @Setter
     @Getter

@@ -229,8 +229,10 @@ $('#updateSave').click(function () {
     var updateNote = $('#updateNote').val();
     if (updateDeadline == "")
         updateDeadline = new Date().pattern("yyyy/MM/dd hh:mm:ss");
-    else
+    else {
         updateDeadline = updateDeadline.replace(/-/g, "/");
+        updateDeadline = updateDeadline + ":00";
+    }
 
 
     $.ajax({

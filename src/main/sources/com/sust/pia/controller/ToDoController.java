@@ -43,7 +43,7 @@ public class ToDoController {
     private void writeJSON2Response(Object out, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            log.debug("SERVER[ToDoController] to Front End: " + out);
+            log.debug("SERVER to Front End: " + out);
             response.getWriter().print(out);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,7 +70,7 @@ public class ToDoController {
                            @RequestParam(value = "order") String order,
                            HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("userObj");
-        log.debug("SERVER[ToDoController] Get user: " + user);
+        log.debug("Get user: " + user);
         int size = toDoService.count(user.getId());
         DataList<ToDo> toDoList = new DataList<>();
         List<ToDo> list = toDoService.findAllData(user.getId(), offset, limit, sort, order);
@@ -95,7 +95,7 @@ public class ToDoController {
     public void insertData(@RequestBody ToDo toDo, HttpServletRequest request,
                            HttpServletResponse response) {
         toDo.setUserId(((User) request.getSession().getAttribute("userObj")).getId());
-        log.debug("SERVER[ToDoController] Get ToDo: " + toDo.toString());
+        log.debug("Get ToDo: " + toDo.toString());
         JSONObject result = new JSONObject();
         if (toDoService.insert(toDo) > 0)
             result.put("flag", true);
@@ -116,7 +116,7 @@ public class ToDoController {
     @PostMapping(value = "/deleteByIds")
     @ResponseBody
     public void deleteByIds(@RequestParam(value = "ids") String ids, HttpServletResponse response) {
-        log.debug("SERVER[ToDoController] Get ids: " + ids);
+        log.debug("Get ids: " + ids);
         String[] idArray = ids.split(",");
         JSONObject result = new JSONObject();
         try {
@@ -142,6 +142,8 @@ public class ToDoController {
     public void updateData(@RequestBody ToDo toDo,
                            HttpServletResponse response, HttpServletRequest request) {
         toDo.setUserId(((User) request.getSession().getAttribute("userObj")).getId());
+        log.debug("SERVER Get ToDo " + toDo.toString());
+        log.debug("The deadline of the ToDo "+toDo.getDeadline());
         JSONObject result = new JSONObject();
         if (toDoService.update(toDo) > 0)
             result.put("flag", true);
@@ -166,11 +168,12 @@ public class ToDoController {
     public void findByTime(@RequestParam(value = "startDate") String startDate,
                            @RequestParam(value = "endDate") String endDate,
                            HttpServletRequest request, HttpServletResponse response) {
+        log.debug("SERVER Get startDate, endDate" + startDate + endDate);
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         User user = (User) request.getSession().getAttribute("userObj");
         endDate = endDate.replaceAll("/", "-");
         startDate = startDate.replaceAll("/", "-");
-        log.debug("SERVER[ToDoController-findByDate] Get user: " + user);
+        log.debug("SERVER Get user: " + user);
         DataList<ToDo> toDoList = new DataList<>();
         try {
             List<ToDo> list = toDoService.findByTime(format.parse(startDate), format.parse(endDate), user.getId());
@@ -179,7 +182,7 @@ public class ToDoController {
                 toDoList.setTotal(list.size());
             }
         } catch (Exception e) {
-            log.error("SERVER[ToDoController]: " + e.toString());
+            log.error("SERVER " + e.toString());
 
         }
 
@@ -207,7 +210,7 @@ public class ToDoController {
             toDoList.setTotal(list.size());
 
         } catch (Exception e) {
-            log.error("SERVER[ToDoController]: " + e.toString());
+            log.error("SERVER " + e.toString());
 
         }
         writeJSON2Response(toDoList.toString(), response);

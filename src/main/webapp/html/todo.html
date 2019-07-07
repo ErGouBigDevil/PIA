@@ -260,10 +260,10 @@
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
-        $('#insertDeadline').datetimepicker();
-        $('#updateDeadline').datetimepicker();
-        $('#startDate').datetimepicker();
-        $('#endDate').datetimepicker();
+        $('#insertDeadline').datetimepicker({lang:'ch'});
+        $('#updateDeadline').datetimepicker({lang:'ch'});
+        $('#startDate').datetimepicker({lang:'ch'});
+        $('#endDate').datetimepicker({lang:'ch'});
 
         $('#logout').click(function () {
             $.ajax({

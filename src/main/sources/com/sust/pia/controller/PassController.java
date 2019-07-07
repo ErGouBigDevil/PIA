@@ -36,7 +36,7 @@ public class PassController {
     private void writeJSON2Response(Object out, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            log.debug("SERVER[PassController] to Front End: " + out);
+            log.debug("SERVER to Front End: " + out);
             response.getWriter().print(out);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class PassController {
                            @RequestParam(value = "order") String order,
                            HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("userObj");
-        log.debug("SERVER[PassController] Get user: " + user);
+        log.debug("SERVER Get user: " + user);
         int size = passService.count(user.getId());
         DataList<Pass> passList = new DataList<>();
         List<Pass> list = passService.findAllData(user.getId(), offset, limit, sort, order);
@@ -68,7 +68,7 @@ public class PassController {
     public void insertData(@RequestBody Pass pass, HttpServletRequest request,
                            HttpServletResponse response) {
         pass.setUserId(((User) request.getSession().getAttribute("userObj")).getId());
-        log.debug("SERVER[PassController] Get Pass: " + pass.toString());
+        log.debug("SERVER Get Pass: " + pass.toString());
         JSONObject result = new JSONObject();
         if (passService.insert(pass) > 0)
             result.put("flag", true);
@@ -81,7 +81,7 @@ public class PassController {
     @PostMapping(value = "/deleteByIds")
     @ResponseBody
     public void deleteByIds(@RequestParam(value = "ids") String ids, HttpServletResponse response) {
-        log.debug("SERVER[PassController] Get ids: " + ids);
+        log.debug("SERVER Get ids: " + ids);
         JSONObject result = new JSONObject();
         String[] idArray = ids.split(",");
         try {
@@ -115,7 +115,7 @@ public class PassController {
                            HttpServletRequest request, HttpServletResponse response) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         User user = (User) request.getSession().getAttribute("userObj");
-        log.debug("SERVER[PassController-findByDate] Get user: " + user);
+        log.debug("SERVER Get user: " + user);
         DataList<Pass> passList = new DataList<>();
         try {
             List<Pass> list = passService.findByWebsite(user.getId(), serachWebsite);
@@ -124,7 +124,7 @@ public class PassController {
                 passList.setTotal(list.size());
             }
         } catch (Exception e) {
-            log.error("SERVER[PassController]: " + e.toString());
+            log.error("SERVER " + e.toString());
 
         }
 

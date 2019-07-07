@@ -36,7 +36,7 @@ public class ContactController {
     private void writeJSON2Response(Object out, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            log.debug("SERVER[ContactController] to Front End: " + out);
+            log.debug("SERVER to Front End: " + out);
             response.getWriter().print(out);
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,7 +51,7 @@ public class ContactController {
                            @RequestParam(value = "order") String order,
                            HttpServletRequest request, HttpServletResponse response) {
         User user = (User) request.getSession().getAttribute("userObj");
-        log.debug("SERVER[ContactController] Get user: " + user);
+        log.debug("SERVER Get user: " + user);
         int size = contactService.count(user.getId());
         DataList<Contact> contactList = new DataList<>();
         List<Contact> list = contactService.findAllData(user.getId(), offset, limit, sort, order);
@@ -68,7 +68,7 @@ public class ContactController {
     public void insertData(@RequestBody Contact contact, HttpServletRequest request,
                            HttpServletResponse response) {
         contact.setUserId(((User) request.getSession().getAttribute("userObj")).getId());
-        log.debug("SERVER[ContactController] Get Contact: " + contact.toString());
+        log.debug("SERVER Get Contact: " + contact.toString());
         JSONObject result = new JSONObject();
         if (contactService.insert(contact) > 0)
             result.put("flag", true);
@@ -81,7 +81,7 @@ public class ContactController {
     @PostMapping(value = "/deleteByIds")
     @ResponseBody
     public void deleteByIds(@RequestParam(value = "ids") String ids, HttpServletResponse response) {
-        log.debug("SERVER[ContactController] Get ids: " + ids);
+        log.debug("SERVER Get ids: " + ids);
         JSONObject result = new JSONObject();
         String[] idArray = ids.split(",");
         try {
@@ -115,7 +115,7 @@ public class ContactController {
                            HttpServletRequest request, HttpServletResponse response) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         User user = (User) request.getSession().getAttribute("userObj");
-        log.debug("SERVER[ContactController-findByDate] Get user: " + user);
+        log.debug("SERVER Get user: " + user);
         DataList<Contact> contactList = new DataList<>();
         try {
             List<Contact> list = contactService.findByName(user.getId(), serachName);
@@ -124,7 +124,7 @@ public class ContactController {
                 contactList.setTotal(list.size());
             }
         } catch (Exception e) {
-            log.error("SERVER[ContactController]: " + e.toString());
+            log.error("SERVER " + e.toString());
 
         }
 
@@ -144,7 +144,7 @@ public class ContactController {
             contactList.setTotal(list.size());
 
         } catch (Exception e) {
-            log.error("SERVER[ContactController]: " + e.toString());
+            log.error("SERVER " + e.toString());
 
         }
         writeJSON2Response(contactList.toString(), response);
