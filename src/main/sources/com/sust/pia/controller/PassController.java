@@ -33,6 +33,14 @@ public class PassController {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
 
+    /**
+     * @Description 传输JSON数据至前端
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:20
+     * @Param out JSON数据
+     * @Param response
+     * @Return void
+     */
     private void writeJSON2Response(Object out, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -43,6 +51,18 @@ public class PassController {
         }
     }
 
+    /**
+     * @Description 分页查询数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:20
+     * @Param limit
+     * @Param offset
+     * @Param sort
+     * @Param order
+     * @Param request
+     * @Param response
+     * @Return void
+     */
     @GetMapping(value = "/getAllInfo")
     @ResponseBody
     public void getAllInfo(@RequestParam(value = "limit", defaultValue = "10") Integer limit,
@@ -63,6 +83,15 @@ public class PassController {
     }
 
 
+    /**
+     * @Description 插入数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:20
+     * @Param pass 密码Pass对象
+     * @Param request
+     * @Param response
+     * @Return void
+     */
     @PostMapping(value = "/insertData")
     @ResponseBody
     public void insertData(@RequestBody Pass pass, HttpServletRequest request,
@@ -78,6 +107,14 @@ public class PassController {
     }
 
 
+    /**
+     * @Description 根据id删除数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:21
+     * @Param ids 指定地id
+     * @Param response
+     * @Return void
+     */
     @PostMapping(value = "/deleteByIds")
     @ResponseBody
     public void deleteByIds(@RequestParam(value = "ids") String ids, HttpServletResponse response) {
@@ -95,6 +132,15 @@ public class PassController {
     }
 
 
+    /**
+     * @Description 更新数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:21
+     * @Param pass 密码Pass对象
+     * @Param response
+     * @Param request
+     * @Return void
+     */
     @PostMapping(value = "/updateData")
     @ResponseBody
     public void updateData(@RequestBody Pass pass,
@@ -109,6 +155,15 @@ public class PassController {
     }
 
 
+    /**
+     * @Description 根据网站名查询密码
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:21
+     * @Param serachWebsite 搜索的网站名
+     * @Param request
+     * @Param response
+     * @Return void
+     */
     @PostMapping(value = "/findByWebsite")
     @ResponseBody
     public void findByName(@RequestParam(value = "searchWebsite") String serachWebsite,

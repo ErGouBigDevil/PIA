@@ -33,6 +33,14 @@ public class ContactController {
     private Logger log = LoggerFactory.getLogger(this.getClass());
 
 
+    /**
+     * @Description 传输JSON数据至前端
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:15
+     * @Param out JSON数据
+     * @Param response
+     * @Return void
+     */
     private void writeJSON2Response(Object out, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -43,6 +51,18 @@ public class ContactController {
         }
     }
 
+    /**
+     * @Description 分页查询数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:15
+     * @Param limit
+     * @Param offset
+     * @Param sort 指定顺序
+     * @Param order 排序关键字
+     * @Param request
+     * @Param response
+     * @Return void
+     */
     @GetMapping(value = "/getAllInfo")
     @ResponseBody
     public void getAllInfo(@RequestParam(value = "limit", defaultValue = "10") Integer limit,
@@ -63,6 +83,15 @@ public class ContactController {
     }
 
 
+    /**
+     * @Description 插入数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:16
+     * @Param contact 联系人Contact对象
+     * @Param request
+     * @Param response
+     * @Return void
+     */
     @PostMapping(value = "/insertData")
     @ResponseBody
     public void insertData(@RequestBody Contact contact, HttpServletRequest request,
@@ -78,6 +107,14 @@ public class ContactController {
     }
 
 
+    /**
+     * @Description 删除指定id数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:16
+     * @Param ids 指定的id
+     * @Param response
+     * @Return void
+     */
     @PostMapping(value = "/deleteByIds")
     @ResponseBody
     public void deleteByIds(@RequestParam(value = "ids") String ids, HttpServletResponse response) {
@@ -94,7 +131,15 @@ public class ContactController {
         writeJSON2Response(result, response);
     }
 
-
+    /**
+     * @Description 更新数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:16
+     * @Param contact 联系人Contact对象
+     * @Param response
+     * @Param request
+     * @Return void
+     */
     @PostMapping(value = "/updateData")
     @ResponseBody
     public void updateData(@RequestBody Contact contact,
@@ -108,7 +153,15 @@ public class ContactController {
         writeJSON2Response(result, response);
     }
 
-
+    /**
+     * @Description 查询指定姓名地联系人信息
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:16
+     * @Param serachName 指定搜索姓名
+     * @Param request
+     * @Param response
+     * @Return void
+     */
     @PostMapping(value = "/findByName")
     @ResponseBody
     public void findByName(@RequestParam(value = "searchName") String serachName,
@@ -131,7 +184,15 @@ public class ContactController {
         writeJSON2Response(contactList.toString(), response);
     }
 
-
+    /**
+     * @Description 根据关键字查找数据
+     * @Author Haodong Zhao
+     * @Date 2019/7/9 18:16
+     * @Param keyword 关键字
+     * @Param response
+     * @Param request
+     * @Return void
+     */
     @PostMapping(value = "/findByKeyWord")
     @ResponseBody
     public void findByKeyWord(@RequestParam(value = "keyword") String keyword,

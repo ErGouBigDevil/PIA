@@ -47,11 +47,11 @@ public class UserController {
     }
 
     /**
-     * @Description
+     * @Description 用户登录
      * @Author Haodong Zhao
      * @Date 2019/7/4 16:41
-     * @Param username
-     * @Param password
+     * @Param username 用户名
+     * @Param password 密码
      * @Param request
      * @Param response
      * @Return void
@@ -76,10 +76,13 @@ public class UserController {
 
 
     /**
-     * @Description
+     * @Description 用户注册
      * @Author Haodong Zhao
-     * @Date 2019/7/4 16:40
-     * @Param user
+     * @Date 2019/7/4 18:23
+     * @Param username 用户名
+     * @Param password 密码
+     * @Param email 电子邮箱
+     * @Param request
      * @Param response
      * @Return void
      */
@@ -103,10 +106,10 @@ public class UserController {
 
 
     /**
-     * @Description
+     * @Description 检查用户名是否已经被注册
      * @Author Haodong Zhao
      * @Date 2019/7/4 16:42
-     * @Param username
+     * @Param username 需要查询的用户名
      * @Param response
      * @Return void
      */
@@ -123,11 +126,12 @@ public class UserController {
     }
 
     /**
-     * @Description
+     * @Description 用户退出
      * @Author Haodong Zhao
-     * @Date 2019/7/4 16:42
+     * @Date 2019/7/4 18:25
      * @Param request
-     * @Return java.lang.String
+     * @Param response
+     * @Return void
      */
     @PostMapping(value = "/logout")
     @ResponseBody
