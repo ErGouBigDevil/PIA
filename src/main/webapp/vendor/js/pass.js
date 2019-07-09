@@ -21,7 +21,7 @@ function initTable() {
         url: getPath() + "/pass/getAllInfo",
         pagination: true, //启动分页
         pageNumber: 1,
-        pageSize: 10,
+        pageSize: 5,
         pageList: [10, 25, 50, 100], //记录数可选列表
         search: false,  //是否启用查询
         showColumns: true,  //显示下拉框勾选要显示的列

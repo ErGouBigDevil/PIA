@@ -4,9 +4,6 @@ function getPath() {
     var pos = curPath.indexOf(pathName);
     var localhostPath = curPath.substring(0, pos);
     var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-    // console.log(pathName)
-    // console.log(pathName.substr(1))
-    // console.log(projectName)
     return localhostPath + projectName;
 }
 
@@ -24,7 +21,7 @@ function initTable() {
         url: getPath() + "/todo/getAllInfo",
         pagination: true, //启动分页
         pageNumber: 1,
-        pageSize: 10,
+        pageSize: 5,
         pageList: [10, 25, 50, 100], //记录数可选列表
         search: false,  //是否启用查询
         showColumns: true,  //显示下拉框勾选要显示的列
